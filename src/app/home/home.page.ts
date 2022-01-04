@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
     if (this.admin) {
       HomeServiceService.tableData$.next();
     } else {
-      HomeServiceService.tableData$.next(delegacion);
+      HomeServiceService.tableData$.next(parseInt(delegacion,10));
     }
   }
 
