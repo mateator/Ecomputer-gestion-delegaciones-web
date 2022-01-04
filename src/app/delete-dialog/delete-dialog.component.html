@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      BORRAR CLIENTE
+    </ion-title>
+  </ion-toolbar>
+</ion-header><br>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      Desea borrar el cliente {{data.cliente}} ?
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button color="danger" (click)="confirm()">CONFIRMAR</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button color="primary" (click)="cancel()">CANCELAR</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

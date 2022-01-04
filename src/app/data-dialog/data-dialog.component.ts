@@ -12,12 +12,8 @@ export class DataDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,private homeService: HomeServiceService)  {  }
   ngOnInit() {
     console.log(this.data);
-    this.data.solicitudInteres.map((data) => {
-      //work in progress
 
-      this.interes.push(data.interesId);
-      this.getIntereses();
-    });
+    this.getIntereses();
 
     if (this.interes.length===0){
       this.interes=['No hay intereses'];
@@ -25,12 +21,26 @@ export class DataDialogComponent implements OnInit {
   }
 
   getIntereses(){
-    this.homeService.getAllIntereses().subscribe((data: any) => {
-      data.map((data2) => {
-        const interes = this.interes.filter(dato=> dato.solicitudInteres===data2.id);
-        console.log(interes);
+    //introduce los ids de los intereses
+    this.data.solicitudInteres.map((data) => {
+      // console.log(data);
+      this.interes.push(data.interesId);
+      // console.log(data);
+    });
 
+    //reemplaza los ids mostrados en pantalla por los nombres
+    this.homeService.getAllIntereses().subscribe((arrayIntereses: any) => {
+      this.interes.map(interesId =>{
+        const arrayFiltrado = arrayIntereses.filter(interesDeApi => interesDeApi.id=== interesId);
+        // console.log(arrayIntereses);
+
+        if(arrayFiltrado[0] !== undefined){
+          this.interes.push(arrayFiltrado[0].tipo);
+        }
       });
+      //buscar otro modo para reemplazar esto
+      this.interes.splice(0,this.interes.length/2);
+      this.interes = [...this.interes];
     });
   }
 }

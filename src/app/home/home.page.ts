@@ -1,3 +1,4 @@
+import { DeleteDialogComponent } from './../delete-dialog/delete-dialog.component';
 import { HomeServiceService } from './../services/home-service.service';
 import { DataDialogComponent } from './../data-dialog/data-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -78,8 +79,14 @@ export class HomePage implements OnInit {
   //borra la solicitud
   borrar(row) {
     console.log(row);
-    this.homeService.deleteSolicitud(row.id).subscribe();
-    this.getSolicitudesId();
+    const dialog = this.dialog.open(DeleteDialogComponent, {
+      data: row,
+      width: '30%',
+    });
+    dialog.afterClosed().subscribe(data => {
+      console.log(row);
+      this.getSolicitudesId();
+    });
   }
 
   //cierra sesion y redirecciona al login
