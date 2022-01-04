@@ -27,8 +27,8 @@ export class DataDialogComponent implements OnInit {
   getIntereses(){
     this.homeService.getAllIntereses().subscribe((data: any) => {
       data.map((data2) => {
-
-        console.log(data2);
+        const interes = this.interes.filter(dato=> dato.solicitudInteres===data2.id);
+        console.log(interes);
 
       });
     });
