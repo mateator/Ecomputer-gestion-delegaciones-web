@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ecomputer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card id="container">
+    <div id="imagen">
+      <img src="../../assets/img/logo.jpeg" alt="Avatar">
+
+    </div>
+    <div id="login">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <ion-icon name="person-outline"></ion-icon>
+            </ion-col>
+
+            <ion-col size="10">
+              <ion-item>
+                <ion-label position="floating">Usuario</ion-label>
+                <ion-input type="text" name="usuario" required ngModel> </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="2">
+              <ion-icon name="key-outline"></ion-icon>
+            </ion-col>
+
+            <ion-col size="10">
+              <ion-item>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input type="password" name="password" required ngModel > </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-button type="submit" color="tertiary" shape="round" expand="block" [disabled]="loginForm.invalid">LOGIN
+          </ion-button>
+
+        </ion-grid>
+
+      </form>
+
+    </div>
+
+  </ion-card>
+</ion-content>

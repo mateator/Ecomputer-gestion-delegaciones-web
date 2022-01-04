@@ -1,0 +1,55 @@
+ion-content{
+  --background: #d3ceff;
+}
+ion-header{
+  --ion-background-color: #000000a6;
+  --ion-text-color: white;
+  text-align: center;
+}
+#container{
+  text-align: center;
+  overflow: visible;
+  top: 25%;
+  width: 350px;
+  margin: auto;
+  height: 400px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+#imagen img{
+  height: 150px;
+  border-radius: 33%;
+  background-color: white;
+}
+
+#imagen {
+
+  position: absolute;
+  background-color: #d3ceff;
+  width: 50%;
+  padding: 10px;
+  border-radius: 33%;
+  left: 0;
+  right: 0;
+  top: -80px;
+  margin: auto;
+  z-index: 2;
+}
+
+#login{
+  position: relative;
+  height: 200px;
+  padding-top: 110px;
+  width: 70%;
+  margin: auto;
+}
+
+#login ion-row{
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+ion-icon{
+  font-size: 30px;
+  padding-top: 15px;
+}

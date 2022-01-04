@@ -1,0 +1,11 @@
+ion-header{
+  text-align: center;
+  --ion-background-color: #402bff;
+  --ion-text-color: white;
+}
+.iconos{
+  pointer-events: none;
+}
+ion-icon, ion-grid{
+  font-size: 1.1em;
+}

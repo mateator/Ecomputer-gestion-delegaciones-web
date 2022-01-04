@@ -1,0 +1,36 @@
+ion-content{
+  --ion-background-color: #402bff23;
+}
+.editForm{
+  background-color: #402bff23;
+}
+ion-header{
+  text-align: center;
+  --ion-background-color: #000000a6;
+  --ion-text-color: white;
+}
+ion-grid{
+  max-width: 55em;
+}
+
+ion-row{
+  margin-top:1em;
+  text-align: left;
+}
+.centro, .derecha{
+  width: 100%;
+  margin: auto;
+}
+.izquierda{
+  width: 90%;
+  margin: auto;
+}
+table{
+  margin-top:1em;
+  width:100%;
+}
+th{
+  color: white;
+  background-color: #402bff;
+}
+

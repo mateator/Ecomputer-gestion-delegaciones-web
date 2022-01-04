@@ -1,20 +1,153 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="logout">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title *ngIf="!admin">
+      Kit Digital - {{data[0]?.delegacion.ubicacion}}
+      <ion-button class="logout" color="danger" (click)="logout()" shape="round">LOGOUT</ion-button>
+    </ion-title>
+    <ion-title *ngIf="admin">
+      Kit Digital - ADMIN
+      <ion-button class="logout" color="danger" (click)="logout()" shape="round">LOGOUT</ion-button>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <table class="tableDiv" mat-table [dataSource]="data" matSort>
+<!-- icons -->
+    <ng-container matColumnDef="add" >
+      <th colspan="9" *matHeaderCellDef class="headerFilter">
+        <span (click)="add()" class="cursorClick" title="crear" *ngIf="admin">
+        <ion-icon class="iconoCrear" name="person-add-outline" ></ion-icon>
+        </span>
+        <span (click)="clicked = !clicked" class="cursorClick" title="filtrar">
+          <ion-icon class="iconoFiltrar" slot="icon-only" name="filter-outline" ></ion-icon>
+        </span>
+      </th>
+    </ng-container>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<!-- filterForm -->
+    <ng-container matColumnDef="filterForm">
+      <th mat-header-cell  *matHeaderCellDef colspan="9">
+        <form [formGroup]="filtersForm" *ngIf="clicked" class="filterForm">
+            <mat-form-field appearance="outline" >
+              <mat-label>Filter By</mat-label>
+              <input  formControlName="filter" matInput placeholder="filter">
+            </mat-form-field>
+          <ion-button color="warning" shape="round" (click)="clicked = !clicked">Apply filters</ion-button>
+        </form>
+      </th>
+    </ng-container>
+
+      <!-- header of Sede -->
+      <ng-container matColumnDef="sede">
+        <th mat-header-cell colspan="3" *matHeaderCellDef> SEDE </th>
+      </ng-container>
+
+      <!-- Data of Sede -->
+      <ng-container matColumnDef="asignado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sede"> ASIGNADO </th>
+        <td *matCellDef="let row" class="sede">
+          <ion-checkbox [disabled]="true" checked="{{row.asignado}}"></ion-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id" *ngIf="admin">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sede"> DELEGACION </th>
+        <td mat-cell *matCellDef="let row" class="sede">{{row.delegacion.ubicacion}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="comercial">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sede"> COMERCIAL </th>
+        <td mat-cell *matCellDef="let row" class="sede">{{row.comercial}}</td>
+      </ng-container>
+
+
+      <!-- header of Sede -->
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell colspan="3" *matHeaderCellDef> ESTADO </th>
+      </ng-container>
+
+      <!-- data of Estado -->
+      <ng-container matColumnDef="contactado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sede"> CONTACTADO </th>
+        <td mat-cell *matCellDef="let row" class="sede">
+          <ion-checkbox [disabled]="true" checked="{{row.contactado}}"></ion-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="presupuestado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sede"> PRESUPUESTADO </th>
+        <td mat-cell *matCellDef="let row" class="sede">
+          <ion-checkbox [disabled]="true" checked="{{row.presupuestado}}"></ion-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tramitado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sede"> TRAMITADO </th>
+        <td mat-cell *matCellDef="let row" class="sede">
+          <ion-checkbox [disabled]="true" checked="{{row.tramitado}}"></ion-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- header of cliente -->
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell colspan="3" *matHeaderCellDef> CLIENTE </th>
+      </ng-container>
+
+      <!-- data of cliente -->
+      <ng-container matColumnDef="clienteName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="cliente"> CLIENTE </th>
+        <td mat-cell *matCellDef="let row" class="cliente">{{row.cliente}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="cliente"> EMAIL </th>
+        <td mat-cell *matCellDef="let row" class="cliente">{{row.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="seeMoreData">
+        <th mat-header-cell  *matHeaderCellDef class="cliente"> ACCIONES </th>
+        <td *matCellDef="let row" class="cliente" title="ver">
+          <span class="cursorClick" (click)="showDataRow(row)">
+            <ion-icon name="eye-outline"  class="iconoVer"></ion-icon>
+          </span>
+          <span class="cursorClick" (click)="edit(row)" title="editar" *ngIf="admin">
+            <ion-icon name="pencil-outline"  class="iconoEditar"></ion-icon>
+          </span>
+          <span class="cursorClick" (click)="borrar(row)" title="borrar" *ngIf="admin">
+            <ion-icon name="trash-outline" class="iconoBorrar"></ion-icon>
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- row del add -->
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['add']"
+        class="example-second-header-row"
+      ></tr>
+      <!-- row del filtro -->
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['filterForm']"
+        [hidden]="!clicked"
+        class="example-second-header-row"
+      ></tr>
+    <!-- row de las cabeceras -->
+    <tr
+      mat-header-row
+      *matHeaderRowDef="['sede', 'estado', 'cliente']"
+      class="header-row"
+    ></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsData"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsData;"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="filtersForm.value.id"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+    (page)="changePage($event)">
+  </mat-paginator>
+
 </ion-content>

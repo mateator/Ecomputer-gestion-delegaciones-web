@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      datos del cliente {{data.cliente}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header><br>
+<ion-grid>
+  <ion-row>
+    <ion-col  size-xs="12" size-lg="6">
+      <span title="cliente">
+        <ion-icon name="person" class="iconos"></ion-icon> {{data.cliente}}
+      </span>
+    </ion-col>
+    <ion-col size-xs="12" size-lg="6">
+      <span title="contacto">
+        <ion-icon name="person-outline" class="iconos"></ion-icon> {{data.contacto}}
+      </span>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-checkbox [disabled]="true" checked="{{data.asignado}}"></ion-checkbox> Asignado
+    </ion-col>
+    <ion-col size-xs="12" size-lg="6">
+      <span title="delegacion">
+        <ion-icon name="business-outline" class="iconos"></ion-icon> {{data.delegacion.ubicacion}}
+      </span>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col  size-xs="12" size-lg="6">
+      <ion-checkbox [disabled]="true" checked="{{data.contactado}}"></ion-checkbox>Contactado
+    </ion-col>
+
+    <ion-col size-xs="12" size-lg="6">
+      <span title="comercial">
+        <ion-icon name="briefcase-outline" class="iconos"></ion-icon> {{data.comercial}}
+      </span>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col  size-xs="12" size-lg="6">
+      <ion-checkbox [disabled]="true" checked="{{data.presupuestado}}"></ion-checkbox> Presupuestado
+    </ion-col>
+    <ion-col  size-xs="12" size-lg="6">
+      <span title="telefono">
+      <ion-icon name="call-outline" class="iconos"></ion-icon> {{data.telefono}}
+      </span>
+    </ion-col>
+  </ion-row>
+  <ion-row  size-xs="12" size-lg="6">
+    <ion-col>
+      <ion-checkbox [disabled]="true" checked="{{data.tramitado}}"></ion-checkbox> Tramitado
+    </ion-col>
+    <ion-col  size-xs="12" size-lg="6">
+      <span title="email">
+      <ion-icon name="mail-outline" class="iconos"></ion-icon> {{data.email}}
+      </span>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col  size-xs="12">
+      <span title="interes">
+      <ion-icon name="alert-outline" class="iconos"></ion-icon> {{interes}}
+      </span>
+    </ion-col>
+  </ion-row>
+</ion-grid>
