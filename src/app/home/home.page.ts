@@ -23,11 +23,10 @@ export class HomePage implements OnInit {
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
-    this.displayedColumnsData = ['asignado', 'id', 'comercial', 'contactado', 'presupuestado', 'tramitado',
-      'clienteName', 'email', 'seeMoreData'];
+    this.displayedColumnsData = ['asignado', 'delegacion', 'comercial', 'contactado', 'presupuestado', 'tramitado',
+      'cliente', 'email', 'seeMoreData'];
     if (sessionStorage.getItem('rol') === 'USER') {
-      this.displayedColumnsData = this.displayedColumnsData.filter(data => data !== 'id');
-
+      this.displayedColumnsData = this.displayedColumnsData.filter(data => data !== 'delegacion');
       this.admin = false;
     }
     this.getSolicitudesId();
@@ -48,6 +47,9 @@ export class HomePage implements OnInit {
     }
   }
 
+  filtrar(){
+
+  }
 
   //paginator
   changePage(event: PageEvent) {
