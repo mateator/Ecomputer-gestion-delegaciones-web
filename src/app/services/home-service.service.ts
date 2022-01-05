@@ -16,7 +16,6 @@ export class HomeServiceService {
   constructor(private http: HttpClient) { }
 
   getSolicitudesId(){
-    console.log('asd');
 
     return HomeServiceService.tableData$.pipe(
       switchMap(delegacionId => this.http.post('http://localhost:3000/solicitud/',{delegacionId}))
@@ -46,8 +45,13 @@ export class HomeServiceService {
     return this.http.put('http://localhost:3000/solicitud/'+id+'/edit/',delegacion);
   }
 
+  solicitudInteresEdit(idSolicitud, changes){
+    const body = {idSolicitud, changes};
+    return this.http.post('http://localhost:3000/solicitudInteres/edit', body);
+
+  }
+
   deleteSolicitud(id){
-    console.log('qweq');
 
     const body=({id});
     return this.http.post('http://localhost:3000/solicitud/delete/',body);

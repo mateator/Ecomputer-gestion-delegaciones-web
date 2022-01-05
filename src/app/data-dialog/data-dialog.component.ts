@@ -11,7 +11,6 @@ export class DataDialogComponent implements OnInit {
   interes=[];
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,private homeService: HomeServiceService)  {  }
   ngOnInit() {
-    console.log(this.data);
 
     this.getIntereses();
 
@@ -23,16 +22,13 @@ export class DataDialogComponent implements OnInit {
   getIntereses(){
     //introduce los ids de los intereses
     this.data.solicitudInteres.map((data) => {
-      // console.log(data);
       this.interes.push(data.interesId);
-      // console.log(data);
     });
 
     //reemplaza los ids mostrados en pantalla por los nombres
     this.homeService.getAllIntereses().subscribe((arrayIntereses: any) => {
       this.interes.map(interesId =>{
         const arrayFiltrado = arrayIntereses.filter(interesDeApi => interesDeApi.id=== interesId);
-        // console.log(arrayIntereses);
 
         if(arrayFiltrado[0] !== undefined){
           this.interes.push(arrayFiltrado[0].tipo);

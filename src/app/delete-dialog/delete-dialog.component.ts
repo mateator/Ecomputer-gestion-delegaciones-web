@@ -17,12 +17,10 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   confirm(){
-    console.log('borrado');
     this.homeService.deleteSolicitud(this.data.id).subscribe();
     this.dialogRef.close();
   }
   cancel(){
-    console.log('cancelado');
     this.dialogRef.close();
   }
 }

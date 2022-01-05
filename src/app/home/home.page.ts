@@ -65,9 +65,7 @@ export class HomePage implements OnInit {
       data: array,
       width: '40%',
     });
-    dialog.afterClosed().subscribe(data => {
-      console.log(array);
-    });
+    dialog.afterClosed().subscribe();
   }
 
   //recoge los datos para el editar
@@ -78,13 +76,11 @@ export class HomePage implements OnInit {
 
   //borra la solicitud
   borrar(row) {
-    console.log(row);
     const dialog = this.dialog.open(DeleteDialogComponent, {
       data: row,
       width: '30%',
     });
     dialog.afterClosed().subscribe(data => {
-      console.log(row);
       this.getSolicitudesId();
     });
   }

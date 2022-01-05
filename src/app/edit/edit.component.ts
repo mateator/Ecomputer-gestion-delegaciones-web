@@ -2,6 +2,7 @@ import { HomeServiceService } from './../services/home-service.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { compare } from 'fast-json-patch';
 
 @Component({
   selector: 'app-edit',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class EditComponent implements OnInit {
 
   seleccionados= [{}];
+  idInteres=[];
   editForm: FormGroup;
   displayedColumnsData: string[] = ['intereses'];
   intereses;
@@ -23,15 +25,8 @@ export class EditComponent implements OnInit {
 
     this.datosRow=this.homeService.datosFila;
     this.editForm=this.formGroup(this.datosRow);
-
     this.getIntereses();
-
-    console.log(this.editForm.value);
     this.getDelegacion();
-    console.log('datosRow');
-
-    console.log(this.datosRow);
-
   }
 
   //recoge todos los intereses
@@ -46,27 +41,24 @@ export class EditComponent implements OnInit {
         }
         const interes = this.intereses.filter(dato=>dato.id===data2.interesId);
         this.editForm.value.interes.push(...interes);
-        // console.log(this.datosRow.solicitudInteres.interesId);
         this.interes.push(parseInt(data2.interesId,10));
 
       });
       this.editForm.value.interes.id=this.interes;
-      // console.log(this.editForm.value.interes.id);
 
       this.editForm.get('interes').setValue(this.interes);
-      console.log(this.interes);
       this.selected();
     });
   }
 
   edit(){
+    this.edited();
+    // this.replaceToString();
+
     this.editForm.value.delegacionId=parseInt(this.editForm.value.delegacionId,10);
     this.homeService.editSolicitud(this.datosRow.id,this.editForm.value).subscribe((data) => {
-    // log para ver los datos
-      console.log(data);
     });
-    const idDelegacion = sessionStorage.getItem('idDelegacion');
-    HomeServiceService.tableData$.next(parseInt(idDelegacion,10));
+    HomeServiceService.tableData$.next();
     this.router.navigate(['/home']);
   }
 
@@ -82,27 +74,43 @@ export class EditComponent implements OnInit {
   selected(){
     //si se deselecciona se quita
     this.seleccionados=[];
+    this.idInteres=[];
     // guardo el id de los intereses
     this.editForm.value.interes.map((value: any) => {
       this.seleccionados.push(value);
+      this.idInteres.push(value);
     });
+    this.replaceToString();
+  }
+
+  replaceToString(){
     //reemplaza los ids mostrados en pantalla por los nombres
     this.homeService.getAllIntereses().subscribe((arrayIntereses: any) => {
       this.seleccionados.map(interesId =>{
         const arrayFiltrado = arrayIntereses.filter(interesDeApi => interesDeApi.id=== interesId);
-        // console.log(arrayIntereses);
 
         if(arrayFiltrado[0] !== undefined){
           this.seleccionados.push(arrayFiltrado[0].tipo);
+
         }
       });
       //buscar otro modo para reemplazar esto
       this.seleccionados.splice(0,this.seleccionados.length/2);
       this.seleccionados = [...this.seleccionados];
     });
+    }
+  edited(){
+const datosViejos = this.datosRow.solicitudInteres.map((data) =>
+    data.interesId
+);
+      const datosComparados = compare(datosViejos, this.idInteres);
+    //de momento solo reemplaza string
+      datosComparados.map((data2: any, index) => {
+        data2.oldValue=datosViejos[index];
+      });
+      this.homeService.solicitudInteresEdit(this.datosRow.id,datosComparados).subscribe();
 
   }
-
 
   formGroup(user){
     return new FormGroup({

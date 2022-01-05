@@ -21,7 +21,6 @@ export class NewUserComponent implements OnInit {
     this.getIntereses();
     this.getDelegacion();
     this.newUserForm=this.formGroup(this.newUserForm);
-    console.log(this.newUserForm);
 
   }
 
@@ -41,13 +40,10 @@ export class NewUserComponent implements OnInit {
 
   //crear solicitud
   createUser(){
-    console.log(this.newUserForm.value);
     this.newUserForm.value.delegacionId=parseInt(this.newUserForm.value.delegacionId,10);
     this.homeService.createSolicitud(this.newUserForm.value).subscribe((data: any) => {
-      console.log(data);
         //recorrer para crear el interes
         this.newUserForm.value.interes.map((dato) => {
-        console.log(data.data.id+' - '+dato);
         this.createInteresSolicitud(data.data.id,dato);
       });
     });
@@ -69,8 +65,6 @@ export class NewUserComponent implements OnInit {
     this.homeService.getAllIntereses().subscribe((arrayIntereses: any) => {
       this.seleccionados.map(interesId =>{
         const arrayFiltrado = arrayIntereses.filter(interesDeApi => interesDeApi.id=== interesId);
-        // console.log(arrayIntereses);
-
         if(arrayFiltrado[0] !== undefined){
           this.seleccionados.push(arrayFiltrado[0].tipo);
         }

@@ -9,7 +9,6 @@ export class LoginService {
   constructor( private http: HttpClient) { }
 
   validateLogin(form){
-    console.log(form);
     const body = {email:form.value.usuario, password: form.value.password};
     return this.http.post('http://localhost:3000/check' , body);
   }
