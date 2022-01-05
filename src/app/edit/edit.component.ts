@@ -82,10 +82,25 @@ export class EditComponent implements OnInit {
   selected(){
     //si se deselecciona se quita
     this.seleccionados=[];
+    // guardo el id de los intereses
     this.editForm.value.interes.map((value: any) => {
-      this.seleccionados.push({data: value.tipo});
-      console.log(this.editForm.value);
+      this.seleccionados.push(value);
     });
+    //reemplaza los ids mostrados en pantalla por los nombres
+    this.homeService.getAllIntereses().subscribe((arrayIntereses: any) => {
+      this.seleccionados.map(interesId =>{
+        const arrayFiltrado = arrayIntereses.filter(interesDeApi => interesDeApi.id=== interesId);
+        // console.log(arrayIntereses);
+
+        if(arrayFiltrado[0] !== undefined){
+          this.seleccionados.push(arrayFiltrado[0].tipo);
+        }
+      });
+      //buscar otro modo para reemplazar esto
+      this.seleccionados.splice(0,this.seleccionados.length/2);
+      this.seleccionados = [...this.seleccionados];
+    });
+
   }
 
 
