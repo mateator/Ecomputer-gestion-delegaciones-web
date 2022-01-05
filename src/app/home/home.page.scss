@@ -1,19 +1,20 @@
 ion-content{
-  --ion-background-color: #d3ceff;
+  --ion-background-color: none;
+  background-image: url("./../../assets/img/asanoha-400px.png");
 }
-// table{
-//   border: 1px solid black;
-// }
-.filterForm{
-  float: right;
+.filterForm mat-form-field{
+  width: 90%;
 }
-table tr:nth-child(1) th, table tr:nth-child(2) th{
-  background-color: #d3ceff;
+
+
+table tr:first-child {
+  background-color: none;
+  background-image: url("./../../assets/img/asanoha-400px.png");
 }
+
 ion-header{
-  text-align: center;
   line-height: 2.6em;
-  --ion-background-color: #000000a6;
+  --ion-background-color: #19375d;
   --ion-text-color: white;
 }
 .cursorClick{
@@ -27,7 +28,7 @@ ion-header{
   pointer-events: none;
   color: orangered;
 }
-.iconoBorrar{
+.iconoBorrar{///////
   pointer-events: none;
   color: #c00000;
 }
@@ -36,7 +37,7 @@ table tr:last-child td{
   border-bottom:0 solid
 }
 table tr:nth-child(4) th{
-  background-color: #402bff71;
+  background-color: #7286a0;
 }
 .mat-table{
   border-radius: 2em;
@@ -56,11 +57,9 @@ ion-icon{
   margin-right: 1em;
 }
 
-.headerFilter{
-  text-align: right;
-}
+
 .header-row{
-  background-color: #402bff;
+  background-color: #19375d;
 }
 .header-row th{
   color:white;
