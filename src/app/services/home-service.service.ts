@@ -46,7 +46,23 @@ export class HomeServiceService {
   }
 
   solicitudInteresEdit(idSolicitud, changes){
+    changes.map((data1: any,index: any)=>{
+      console.log(data1);
+
+      changes.map((data2: any) =>{
+        if(data2.oldValue === data1.value && data2.value === data1.oldValue && data2.path !== data1.path){
+          console.log(data1);
+          console.log('-----------------------');
+          changes.splice(index,index+1);
+          console.log(data2);
+          console.log('-----------------------');
+          console.log(index);
+
+        }
+      });
+    });
     const body = {idSolicitud, changes};
+
     return this.http.post('http://localhost:3000/solicitudInteres/edit', body);
 
   }

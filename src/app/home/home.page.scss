@@ -7,7 +7,7 @@ ion-content{
 }
 
 
-table tr:first-child {
+table tr:nth-child(1){
   background-color: none;
   background-image: url("./../../assets/img/asanoha-400px.png");
 }
