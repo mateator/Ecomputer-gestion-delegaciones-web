@@ -4,6 +4,7 @@ ion-content{
 }
 .filterForm mat-form-field{
   width: 90%;
+  color: #19375d;
 }
 
 .tableHeader{
@@ -13,18 +14,20 @@ ion-content{
   border-bottom: 0.0000001px solid gray;
 }
 
-//if admin
+
 .filterButton{
   position: relative;
   top: -60%;
-}
-
-//siempre activo
-.buttonFilter{
   border: 1px solid black;
   border-radius: 5px;
   height: 3em;
   width: 70%;
+}
+
+//if not admin
+.interesField{
+  position: relative;
+  top: -60%;
 }
 
 .tableHeaderFilter{
@@ -36,8 +39,11 @@ ion-header{
   --ion-background-color: #19375d;
   --ion-text-color: white;
 }
-.cursorClick{
+.cursorClick, .filterButtonActions{
   cursor: pointer;
+}
+.filterButtonActions:hover{
+  font-size: 1.1em;
 }
 .iconoVer{
   pointer-events: none;
