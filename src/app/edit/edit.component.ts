@@ -109,12 +109,13 @@ export class EditComponent implements OnInit {
     let contador2 = 0;
 
     datosViejos.map((datoViejo) => {
+      // console.log('contador:' +(contador - contador2));
 
       if (this.idInteres.includes(datoViejo)) {
-        console.log('no se hace nada');
+        // console.log('no se hace nada');
       } else {
         if (this.idInteres.length < datosViejos.length - contador2) {
-          console.log('ha habido un delete:' + datoViejo);
+          // console.log('ha habido un delete:' + datoViejo);
           this.changes.push({ op: 'remove', oldValue: datoViejo });
           contador2++;
 
@@ -126,7 +127,7 @@ export class EditComponent implements OnInit {
             copiaContador++;
           }
 
-          console.log('ha habido un remplazo de ' + datoViejo + 'con:' + this.idInteres[copiaContador - contador2]);
+          // console.log('ha habido un remplazo de ' + datoViejo + 'con:' + this.idInteres[copiaContador - contador2]);
           this.changes.push({ op: 'replace', value: this.idInteres[copiaContador - contador2], oldValue: datoViejo });
 
         }
@@ -134,10 +135,14 @@ export class EditComponent implements OnInit {
       contador++;
     });
     if (this.idInteres.length > datosViejos.length) {
-      const arrayCreations = this.idInteres.splice(datosViejos.length, this.idInteres.length);
-      console.log(arrayCreations);
+      const arrayCreations = this.idInteres;
       arrayCreations.map(creation => {
-        this.changes.push({ op: 'add', value: creation });
+
+        if (!this.changes.some(change => change.value === creation) && !datosViejos.includes(creation)) {
+          // console.log('no hay replace con :' + creation + 'y ' + creation + ' no existe en' + datosViejos);
+          this.changes.push({ op: 'add', value: creation });
+        }
+
       });
     }
     // console.log(this.changes);
