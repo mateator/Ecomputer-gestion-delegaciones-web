@@ -39,9 +39,13 @@ ion-header{
 .cursorClick{
   cursor: pointer;
 }
-.iconoCrear, .iconoVer{
+.iconoVer{
   pointer-events: none;
   color: #402bff;
+}
+.iconoCrear{
+  pointer-events: none;
+  color: white;
 }
 .iconoEditar, .iconoFiltrar{
   pointer-events: none;
