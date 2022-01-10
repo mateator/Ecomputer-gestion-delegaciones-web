@@ -21,6 +21,7 @@ export class HomePage implements OnInit {
   data2 = [];
   delegaciones;
   intereses;
+  arrayfiltros=[];
 
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) { }
 
@@ -50,6 +51,7 @@ export class HomePage implements OnInit {
     });
   }
 
+
   //recoge las delegaciones del id que se le pasen
   getSolicitudesId() {
     this.homeService.getSolicitudesId().subscribe((dato: any) => {
@@ -70,6 +72,7 @@ export class HomePage implements OnInit {
     } else {
       HomeServiceService.tableData$.next(parseInt(this.filtersForm.value.delegacion,10));
     }
+
   }
 
   //paginator

@@ -124,10 +124,7 @@
               <ion-col>
                 <mat-form-field appearance="outline" [ngClass]="admin? '' : 'interesField'">
                   <mat-label>Intereses</mat-label>
-                  <mat-select formControlName="contactado" multiple>
-                    <mat-select-trigger>
-                      {{filtersForm.value.interes ? ' ('+(filtersForm.value.interes.length)+') Seleccionados' : ''}}
-                    </mat-select-trigger>
+                  <mat-select formControlName="contactado">
                     <mat-option *ngFor="let interes of intereses" [value]="interes.id">{{interes.tipo}}
                     </mat-option>
                   </mat-select>
@@ -136,7 +133,6 @@
 
               <ion-col>
                 <ion-button class="filterButton" color="light" (click)="filtrar()">Aplicar Filtros</ion-button>
-
               </ion-col>
             </ion-row>
           </ion-grid>
