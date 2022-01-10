@@ -19,6 +19,8 @@ export class HomePage implements OnInit {
   displayedColumnsData: string[];
   data = [];
   data2 = [];
+  delegaciones;
+  intereses;
 
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) { }
 
@@ -29,9 +31,23 @@ export class HomePage implements OnInit {
       this.displayedColumnsData = this.displayedColumnsData.filter(data => data !== 'delegacion');
       this.admin = false;
     }
+    this.getDelegaciones();
     this.getSolicitudesId();
+    this.getIntereses();
+    this.filtersForm = this.formGroup(this.delegaciones);
 
-    this.filtersForm = this.formGroup();
+  }
+
+  getDelegaciones(){
+    this.homeService.getDelegacion().subscribe((delegacion) => {
+      this.delegaciones=delegacion;
+    });
+  }
+
+  getIntereses(){
+    this.homeService.getAllIntereses().subscribe((interes)=> {
+      this.intereses=interes;
+    });
   }
 
   //recoge las delegaciones del id que se le pasen
@@ -47,8 +63,10 @@ export class HomePage implements OnInit {
     }
   }
 
+  //accion al darle al boton de aplicar filtros
   filtrar(){
-
+    //solo para comprobar si envía esa delagacion
+    HomeServiceService.tableData$.next(parseInt(this.filtersForm.value.delegacion,10));
   }
 
   //paginator
@@ -93,9 +111,16 @@ export class HomePage implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  formGroup() {
+  formGroup(data) {
     return new FormGroup({
-      filter: new FormControl('')
+      asignado: new FormControl(data !== undefined && data.asignado !== undefined ? data.asignado : false),
+      comercial: new FormControl(data !== undefined && data.comercial !== undefined ? data.comercial : ''),
+      contactado: new FormControl(data !== undefined && data.contactado !== undefined ? data.contactado : false),
+      delegacion: new FormControl(data !== undefined && data.delegacion !== undefined ? data.delegacion : false),
+      presupuestado: new FormControl(data !== undefined && data.presupuestado !== undefined ? data.presupuestado : false),
+      tramitado: new FormControl(data !== undefined && data.tramitado !== undefined ? data.tramitado : false),
+      cliente: new FormControl(data !== undefined && data.cliente !== undefined ? data.cliente : ''),
+      interes: new FormControl(data !== undefined && data.interes !== undefined ? data.interes : '')
     });
   }
 }

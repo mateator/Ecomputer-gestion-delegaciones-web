@@ -1,9 +1,10 @@
 ion-content{
-  --ion-background-color: #402bff23;
+  --ion-background-color: none;
+  background-image: url("./../../assets/img/asanoha-400px.png");
 }
 ion-header{
   text-align: center;
-  --ion-background-color: #000000a6;
+  --ion-background-color: #19375d;
   --ion-text-color: white;
 }
 ion-grid{
@@ -28,6 +29,6 @@ table{
 }
 th{
   color: white;
-  background-color: #402bff;
+  background-color: #19375d;
 }
 

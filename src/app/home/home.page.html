@@ -37,26 +37,44 @@
               <ion-col >
                 <mat-form-field appearance="outline">
                   <mat-label>Asignado</mat-label>
-                  <input formControlName="filter" matInput>
+                  <mat-select formControlName="asignado">
+                    <mat-option value="{{filtersForm.value.asignado}}">
+                      <ion-checkbox [disabled]="true" checked="true" value="true"></ion-checkbox> Asignado
+                    </mat-option>
+                    <mat-option>
+                      <ion-checkbox [disabled]="true" checked="false" value="false"></ion-checkbox> No Asignado
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </ion-col>
 
               <ion-col>
                 <mat-form-field appearance="outline">
                   <mat-label>Comercial</mat-label>
-                  <input formControlName="filter" matInput>
+                  <input formControlName="comercial" matInput value="{{filtersForm.value.comercial}}">
                 </mat-form-field>
               </ion-col>
               <ion-col>
                 <mat-form-field appearance="outline">
                   <mat-label>Contactado</mat-label>
-                  <input formControlName="filter" matInput>
+                  <mat-select formControlName="contactado">
+                    <mat-option value="{{filtersForm.value.contactado}}">
+                      <ion-checkbox [disabled]="true" checked="true" value="true"></ion-checkbox> Contactado
+                    </mat-option>
+                    <mat-option>
+                      <ion-checkbox [disabled]="true" checked="false" value="false"></ion-checkbox> No Contactado
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </ion-col>
               <ion-col>
                 <mat-form-field appearance="outline" *ngIf="admin">
                   <mat-label>Delegacion</mat-label>
-                  <input formControlName="filter" matInput>
+                  <mat-select formControlName="delegacion">
+                    <mat-option *ngFor="let delegacion of delegaciones" value="{{delegacion.id}}">
+                      {{delegacion.ubicacion}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </ion-col>
               <ion-col>
@@ -68,35 +86,54 @@
               <ion-col>
                 <mat-form-field appearance="outline">
                   <mat-label>Presupuestado</mat-label>
-                  <input formControlName="filter" matInput>
+                  <mat-select formControlName="presupuestado">
+                    <mat-option value="{{filtersForm.value.presupuestado}}">
+                      <ion-checkbox [disabled]="true" checked="true" value="true"></ion-checkbox> Presupuestado
+                    </mat-option>
+                    <mat-option>
+                      <ion-checkbox [disabled]="true" checked="false" value="false"></ion-checkbox> No Presupuestado
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </ion-col>
 
               <ion-col>
               <mat-form-field appearance="outline">
                 <mat-label>Tramitado</mat-label>
-                <input formControlName="filter" matInput>
+                <mat-select formControlName="tramitado">
+                  <mat-option value="{{filtersForm.value.tramitado}}">
+                    <ion-checkbox [disabled]="true" checked="true" value="true"></ion-checkbox> Tramitado
+                  </mat-option>
+                  <mat-option>
+                    <ion-checkbox [disabled]="true" checked="false" value="false"></ion-checkbox> No Tramitado
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
               </ion-col>
 
               <ion-col>
                 <mat-form-field appearance="outline">
                   <mat-label>Cliente</mat-label>
-                  <input formControlName="filter" matInput>
+                  <input formControlName="cliente" matInput>
                 </mat-form-field>
               </ion-col>
 
               <ion-col>
                 <mat-form-field appearance="outline" [ngClass]="admin? '' : 'interesField'">
                   <mat-label>Intereses</mat-label>
-                  <input formControlName="filter" matInput>
+                  <mat-select formControlName="contactado" multiple>
+                    <mat-select-trigger>
+                      {{filtersForm.value.interes ? ' ('+(filtersForm.value.interes.length)+') Seleccionados' : ''}}
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let interes of intereses" [value]="interes.id">{{interes.tipo}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field><br>
               </ion-col>
 
               <ion-col>
                 <ion-button class="filterButton" color="light" (click)="filtrar()">Aplicar Filtros</ion-button>
 
-                <!-- [ngClass]="admin? '' : 'filterButton'" -->
               </ion-col>
             </ion-row>
           </ion-grid>
