@@ -41,6 +41,7 @@ export class EditComponent implements OnInit {
           this.editForm.value.interes =[];
         }
         const interes = this.intereses.filter(dato=>dato.id===data2.interesId);
+
         this.editForm.value.interes.push(...interes);
         this.interes.push(parseInt(data2.interesId,10));
 
@@ -58,9 +59,9 @@ export class EditComponent implements OnInit {
 
     this.editForm.value.delegacionId=parseInt(this.editForm.value.delegacionId,10);
     this.homeService.editSolicitud(this.datosRow.id,this.editForm.value).subscribe((data) => {
+      HomeServiceService.tableData$.next();
+      this.router.navigate(['/home']);
     });
-    HomeServiceService.tableData$.next();
-    this.router.navigate(['/home']);
   }
 
   getDelegacion(){
@@ -86,9 +87,8 @@ export class EditComponent implements OnInit {
 
   replaceToString(){
     //reemplaza los ids mostrados en pantalla por los nombres
-    this.homeService.getAllIntereses().subscribe((arrayIntereses: any) => {
       this.seleccionados.map(interesId =>{
-        const arrayFiltrado = arrayIntereses.filter(interesDeApi => interesDeApi.id=== interesId);
+        const arrayFiltrado = this.intereses.filter(interesDeApi => interesDeApi.id=== interesId);
 
         if(arrayFiltrado[0] !== undefined){
           this.seleccionados.push(arrayFiltrado[0].tipo);
@@ -97,7 +97,6 @@ export class EditComponent implements OnInit {
       });
       this.seleccionados.splice(0,this.seleccionados.length/2);
       this.seleccionados = [...this.seleccionados];
-    });
     }
 
   edited() {
@@ -107,7 +106,7 @@ export class EditComponent implements OnInit {
 
     let contador = 0;
     let contador2 = 0;
-
+    datosViejos.sort();
     datosViejos.map((datoViejo) => {
       // console.log('contador:' +(contador - contador2));
 
@@ -121,7 +120,10 @@ export class EditComponent implements OnInit {
 
         } else {
 
-          let copiaContador = contador;
+          let copiaContador = contador2;
+          // console.log(copiaContador - contador2);
+          // console.log(this.idInteres[copiaContador - contador2]);
+          // console.log(this.changes.find(change => change.value === this.idInteres[copiaContador - contador2]));
           // eslint-disable-next-line max-len
           while (datosViejos.includes(this.idInteres[copiaContador - contador2]) || this.changes.find(change => change.value === this.idInteres[copiaContador - contador2])) {
             copiaContador++;
@@ -135,11 +137,13 @@ export class EditComponent implements OnInit {
       contador++;
     });
     if (this.idInteres.length > datosViejos.length) {
+      // console.log('s');
+
       const arrayCreations = this.idInteres;
       arrayCreations.map(creation => {
 
         if (!this.changes.some(change => change.value === creation) && !datosViejos.includes(creation)) {
-          // console.log('no hay replace con :' + creation + 'y ' + creation + ' no existe en' + datosViejos);
+          // console.log('Creado: no hay replace con :' + creation + 'y ' + creation + ' no existe en' + datosViejos);
           this.changes.push({ op: 'add', value: creation });
         }
 

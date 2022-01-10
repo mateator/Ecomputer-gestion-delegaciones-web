@@ -104,7 +104,7 @@
 
         <ion-row>
           <ion-col>
-            <br><ion-button color="warning" (click)="edit()" >GUARDAR</ion-button>
+            <br><ion-button color="warning" [disabled]="!editForm.valid" (click)="edit()" >GUARDAR</ion-button>
           </ion-col>
         </ion-row>
 

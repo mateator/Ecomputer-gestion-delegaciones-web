@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NewUserComponent implements OnInit {
 
-  seleccionados= [{}];
+  seleccionados= [];
   newUserForm: FormGroup;
   displayedColumnsData: string[] = ['intereses'];
   intereses;

@@ -2,10 +2,11 @@ import { DeleteDialogComponent } from './../delete-dialog/delete-dialog.componen
 import { HomeServiceService } from './../services/home-service.service';
 import { DataDialogComponent } from './../data-dialog/data-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,21 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   clicked = false;
   filtersForm: FormGroup;
   admin = true;
   displayedColumnsData: string[];
-  data = [];
+  data: MatTableDataSource<any>;
   data2 = [];
   delegaciones;
   intereses;
-  arrayfiltros=[];
+  arrayfiltros={asignado: undefined, delegacionId: undefined, comercial:undefined, contactado: undefined,
+     presupuestado: undefined, tramitado: undefined, cliente: undefined, interesId: undefined};
 
-  constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) { }
+
+  constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit() {
     this.displayedColumnsData = ['asignado', 'delegacion', 'comercial', 'contactado', 'presupuestado', 'tramitado',
@@ -35,13 +40,15 @@ export class HomePage implements OnInit {
     this.getDelegaciones();
     this.getSolicitudesId();
     this.getIntereses();
-    this.filtersForm = this.formGroup(this.delegaciones);
+    this.filtersForm = this.formGroup({});
 
   }
 
   getDelegaciones(){
     this.homeService.getDelegacion().subscribe((delegacion) => {
       this.delegaciones=delegacion;
+      // console.log(delegacion);
+
     });
   }
 
@@ -54,24 +61,29 @@ export class HomePage implements OnInit {
 
   //recoge las delegaciones del id que se le pasen
   getSolicitudesId() {
-    this.homeService.getSolicitudesId().subscribe((dato: any) => {
-      this.data = dato;
+    this.homeService.getSolicitudesId().subscribe((datos: any) => {
+      this.data = this.data = new MatTableDataSource(datos);
+      this.data.paginator = this.paginator;
+
     });
     const delegacion = sessionStorage.getItem('idDelegacion');
     if (this.admin) {
       HomeServiceService.tableData$.next();
     } else {
-      HomeServiceService.tableData$.next(parseInt(delegacion,10));
+      HomeServiceService.tableData$.next({delegacionId: parseInt(delegacion,10)});
     }
   }
 
   //accion al darle al boton de aplicar filtros
   filtrar(){
-    if(this.filtersForm.value.delegacion==='allDelegaciones'){
-      HomeServiceService.tableData$.next();
-    } else {
-      HomeServiceService.tableData$.next(parseInt(this.filtersForm.value.delegacion,10));
-    }
+    // this.arrayfiltros.asignado
+    Object.keys(this.filtersForm.value).map(m => {
+      if (this.filtersForm.value[m] === null || this.filtersForm.value[m] === undefined|| this.filtersForm.value[m] === '') {
+        delete this.filtersForm.value[m];
+      }
+    });
+    // console.log(this.filtersForm.value);
+    HomeServiceService.tableData$.next(this.filtersForm.value);
 
   }
 
@@ -118,15 +130,17 @@ export class HomePage implements OnInit {
   }
 
   formGroup(data) {
+    // console.log(data);
+
     return new FormGroup({
-      asignado: new FormControl(data !== undefined && data.asignado !== undefined ? data.asignado : false),
-      comercial: new FormControl(data !== undefined && data.comercial !== undefined ? data.comercial : ''),
-      contactado: new FormControl(data !== undefined && data.contactado !== undefined ? data.contactado : false),
-      delegacion: new FormControl(data !== undefined && data.delegacion !== undefined ? data.delegacion : false),
-      presupuestado: new FormControl(data !== undefined && data.presupuestado !== undefined ? data.presupuestado : false),
-      tramitado: new FormControl(data !== undefined && data.tramitado !== undefined ? data.tramitado : false),
-      cliente: new FormControl(data !== undefined && data.cliente !== undefined ? data.cliente : ''),
-      interes: new FormControl(data !== undefined && data.interes !== undefined ? data.interes : '')
+      asignado: new FormControl(undefined),
+      comercial: new FormControl(undefined),
+      contactado: new FormControl(undefined),
+      delegacionId: new FormControl(undefined),
+      presupuestado: new FormControl(undefined),
+      tramitado: new FormControl(undefined),
+      cliente: new FormControl(undefined),
+      interesId: new FormControl(undefined),
     });
   }
 }

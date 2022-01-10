@@ -1,20 +1,24 @@
-ion-content{
+ion-content {
   --ion-background-color: none;
   background-image: url("./../../assets/img/asanoha-400px.png");
 }
-.filterForm mat-form-field{
+.filterForm mat-form-field {
   width: 90%;
   color: #19375d;
 }
 
-.tableHeader{
+.tableHeader {
   background-color: #19375d;
   color: white;
   border-bottom: 0.0000001px solid gray;
 }
+ ion-checkbox{
+  position: relative;
+  top: 0.35em;
+  margin-right: 0.5em;
+}
 
-
-.filterButton{
+.filterButton {
   position: relative;
   top: -60%;
   border: 1px solid black;
@@ -24,84 +28,83 @@ ion-content{
 }
 
 //if not admin
-.interesField{
+.interesField {
   position: relative;
   top: -60%;
 }
 
-.tableHeaderFilter{
- background-color: #19375d52;
+.tableHeaderFilter {
+  background-color: #19375d52;
 }
 
-ion-header{
+ion-header {
   line-height: 2.6em;
   --ion-background-color: #19375d;
   --ion-text-color: white;
 }
-.cursorClick, .filterButtonActions{
+.cursorClick,
+.filterButtonActions {
   cursor: pointer;
 }
-.filterButtonActions:hover{
+.filterButtonActions:hover {
   font-size: 1.1em;
 }
-.iconoVer{
+.iconoVer {
   pointer-events: none;
   color: #402bff;
 }
-.iconoCrear{
+.iconoCrear {
   pointer-events: none;
   color: white;
 }
-.iconoEditar, .iconoFiltrar{
+.iconoEditar,
+.iconoFiltrar {
   pointer-events: none;
   color: orangered;
 }
-.iconoBorrar{
+.iconoBorrar {
   pointer-events: none;
   color: #c00000;
 }
-/*To remove the last border*/
-// table tr:last-child td{
-//   border-bottom:0 solid
-// }
-table tr:nth-child(4) th{
+
+table tr:nth-child(4) th {
   background-color: #19375d52;
 }
-// .mat-table{
-//   border-radius: 2em;
-// }
-.tableDiv, mat-paginator{
+.tableDiv,
+mat-paginator {
   width: 95%;
   margin: auto;
 }
-.tableDiv{
+.tableDiv {
   margin-top: 1em;
   border: 1.3px solid gray;
   border-bottom: none;
 }
-mat-paginator{
+mat-paginator {
   margin-bottom: 1em;
   border: 1.3px solid gray;
   border-top: none;
-
 }
 th.mat-header-cell {
   text-align: center;
 }
-td{
+td {
   text-align: center;
 }
-ion-icon{
+ion-icon {
   font-size: 1.25em;
-  margin-right: 1em;
+}
+th span,
+td span,
+.logout ion-icon {
+  margin-right: 0.8em;
 }
 
-
-.header-row{
+.header-row {
   background-color: #19375d;
 }
-.header-row th{
-  color:white;
+.header-row th {
+  color: white;
 }
 .logout {
   float: right;

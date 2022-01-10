@@ -18,7 +18,7 @@ export class HomeServiceService {
   getSolicitudesId(){
 
     return HomeServiceService.tableData$.pipe(
-      switchMap(delegacionId => this.http.post('http://localhost:3000/solicitud/',{delegacionId}))
+      switchMap(body => this.http.post('http://localhost:3000/solicitud/',body))
     );
   }
 
