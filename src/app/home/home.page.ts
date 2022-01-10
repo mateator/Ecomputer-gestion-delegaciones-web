@@ -65,8 +65,11 @@ export class HomePage implements OnInit {
 
   //accion al darle al boton de aplicar filtros
   filtrar(){
-    //solo para comprobar si envía esa delagacion
-    HomeServiceService.tableData$.next(parseInt(this.filtersForm.value.delegacion,10));
+    if(this.filtersForm.value.delegacion==='allDelegaciones'){
+      HomeServiceService.tableData$.next();
+    } else {
+      HomeServiceService.tableData$.next(parseInt(this.filtersForm.value.delegacion,10));
+    }
   }
 
   //paginator

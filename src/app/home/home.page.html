@@ -71,6 +71,9 @@
                 <mat-form-field appearance="outline" *ngIf="admin">
                   <mat-label>Delegacion</mat-label>
                   <mat-select formControlName="delegacion">
+                    <mat-option value="allDelegaciones">
+                      Ver todas las delegaciones
+                    </mat-option>
                     <mat-option *ngFor="let delegacion of delegaciones" value="{{delegacion.id}}">
                       {{delegacion.ubicacion}}
                     </mat-option>
