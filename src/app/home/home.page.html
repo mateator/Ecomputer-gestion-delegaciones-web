@@ -13,24 +13,24 @@
 
 <ion-content>
   <table class="tableDiv" mat-table [dataSource]="data" matSort>
-    <ng-container matColumnDef="description">
-      <th colspan="8"   *matHeaderCellDef><h2>Tabla de Solicitudes</h2></th>
+    <ng-container matColumnDef="description" class="tableHeader">
+      <th class="tableHeader" [attr.colspan]="admin ? 8:7"   *matHeaderCellDef><h2>Tabla de Solicitudes</h2></th>
     </ng-container>
     <!-- icons -->
-    <ng-container matColumnDef="add">
-      <th colspan="1" *matHeaderCellDef class="headerFilter">
-        <span (click)="add()" class="cursorClick" title="crear" *ngIf="admin">
+    <ng-container matColumnDef="add" >
+      <th  colspan="1" *matHeaderCellDef class="headerFilter tableHeader">
+        <span (click)="add()" class="cursorClick " title="crear" *ngIf="admin">
           <ion-icon class="iconoCrear" name="person-add-outline"></ion-icon>
         </span>
-        <span (click)="clicked = !clicked" class="cursorClick" title="filtrar">
+        <span (click)="clicked = !clicked" class="cursorClick " title="filtrar">
           <ion-icon class="iconoFiltrar" slot="icon-only" name="filter-outline"></ion-icon>
         </span>
       </th>
     </ng-container>
 
     <!-- filterForm -->
-    <ng-container matColumnDef="filterForm">
-      <th mat-header-cell *matHeaderCellDef colspan="9">
+    <ng-container matColumnDef="filterForm" >
+      <th mat-header-cell *matHeaderCellDef colspan="9" class="tableHeaderFilter">
         <form [formGroup]="filtersForm" *ngIf="clicked" class="filterForm">
           <ion-grid>
             <ion-row>
@@ -41,16 +41,9 @@
                 </mat-form-field>
               </ion-col>
 
-
               <ion-col >
-                <mat-form-field appearance="outline" *ngIf="admin">
-                  <mat-label>Delegacion</mat-label>
-                  <input formControlName="filter" matInput>
-                </mat-form-field>
-              </ion-col>
-              <ion-col >
-                <mat-form-field appearance="outline" *ngIf="admin">
-                  <mat-label>Delegacion</mat-label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Contactado</mat-label>
                   <input formControlName="filter" matInput>
                 </mat-form-field>
               </ion-col>
@@ -66,6 +59,13 @@
                   <input formControlName="filter" matInput>
                 </mat-form-field>
               </ion-col>
+              <ion-col>
+                <mat-form-field appearance="outline" *ngIf="admin">
+                  <mat-label>Delegacion</mat-label>
+                  <input formControlName="filter" matInput>
+                </mat-form-field>
+              </ion-col>
+
               </ion-row>
               <ion-row>
               <ion-col>
@@ -98,7 +98,7 @@
               </ion-col>
 
               <ion-col>
-                <ion-button color="warning" (click)="filtrar()">Aplicar Filtros</ion-button>
+                <ion-button class="buttonFilter" [ngClass]="admin? '' : 'filterButton'" color="light" (click)="filtrar()">Aplicar Filtros</ion-button>
 
               </ion-col>
             </ion-row>
