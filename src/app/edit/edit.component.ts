@@ -100,105 +100,51 @@ export class EditComponent implements OnInit {
     });
     }
 
-  edited(){
-      // const datosViejos = this.datosRow.solicitudInteres.map((data) =>
-      //     data.interesId
-      // );
+  edited() {
+    const datosViejos = this.datosRow.solicitudInteres.map((data) =>
+      data.interesId
+    );
 
-      // const datosViejos = [1,2,3,4,5,6,7,8];
-      //                     [2,4,5,6,7,8,]
-      //6.8.9.14
-      //                     [3,4,5,6,7,8,9,10]
-         const datosViejos = [1,2,3,4,5,6,7,8];
-                              // 1,3,5,7,10,12,14
-// [1,6,7,8,9,10,12]
-      let contador = 0;
-      let contador2 = 0;
-      let insideWhile = false;
+    let contador = 0;
+    let contador2 = 0;
 
-      datosViejos.map((datoViejo) =>{
-        console.log(insideWhile);
-        console.log('contador:'+ (contador  - contador2));
+    datosViejos.map((datoViejo) => {
 
-        insideWhile=false;
+      if (this.idInteres.includes(datoViejo)) {
+        console.log('no se hace nada');
+      } else {
+        if (this.idInteres.length < datosViejos.length - contador2) {
+          console.log('ha habido un delete:' + datoViejo);
+          this.changes.push({ op: 'remove', oldValue: datoViejo });
+          contador2++;
 
-          if(this.idInteres.includes(datoViejo)){
-            console.log('no se hace nada');
-          }else{
-            if(this.idInteres.length < datosViejos.length - contador2){
-              console.log('ha habido un delete:' + datoViejo);
-              this.changes.push({op:'remove' , oldValue:datoViejo});
-              contador2++;
+        } else {
 
-            }else {
-              console.log('--------------------');
-
-        console.log(this.changes.find(change=> change.value === this.idInteres[contador  - contador2]));
-        console.log('--------------------');
-
-              // eslint-disable-next-line max-len
-              while(datosViejos.includes(this.idInteres[contador  - contador2]) || this.changes.find(change=> change.value === this.idInteres[contador  - contador2])){
-                console.log('entraaaaa');
-                contador++;
-                insideWhile = true;
-                if(contador >25){
-                  break;
-                }
-              }
-              console.log(this.idInteres[contador  - contador2]);
-              // console.log(datosViejos.includes(this.idInteres[contador  - contador2]));
-
-
-              console.log('ha habido un remplazo de ' + datoViejo + 'con:' + this.idInteres[contador-contador2]);
-              this.changes.push({op:'replace' , value:this.idInteres[contador-contador2], oldValue:datoViejo});
-
-              // console.log(this.idInteres.indexOf(datoViejo));
-
-              // console.log(this.idInteres[this.idInteres.indexOf(datoViejo)]);
-              // console.log('oldValue: ' + datoViejo + ', value:' );
-            }
+          let copiaContador = contador;
+          // eslint-disable-next-line max-len
+          while (datosViejos.includes(this.idInteres[copiaContador - contador2]) || this.changes.find(change => change.value === this.idInteres[copiaContador - contador2])) {
+            copiaContador++;
           }
-          if(!insideWhile){
-            contador++;
-          }
-      });
-      if(this.idInteres.length > datosViejos.length){
-        const arrayCreations = this.idInteres.splice(datosViejos.length, this.idInteres.length);
-        console.log(arrayCreations);
-        arrayCreations.map(creation =>{
-          this.changes.push({op:'create' , value:creation});
-        });
 
+          console.log('ha habido un remplazo de ' + datoViejo + 'con:' + this.idInteres[copiaContador - contador2]);
+          this.changes.push({ op: 'replace', value: this.idInteres[copiaContador - contador2], oldValue: datoViejo });
+
+        }
       }
-      console.log(this.changes);
-
-    //   datosViejos.map((datoViejo, index) =>{
-    //     if(this.idInteres.includes(datoViejo)){
-    //       console.log('no se hace nada');
-    //     }else if(this.idInteres.length < datosViejos.length){
-    //       console.log('ha habido un delete');
-    //       console.log('oldValue: ' + datoViejo + ', value:' + this.idInteres[index] );
-
-    //     }else {
-
-    //       console.log('ha habido un remplazo');
-    //       console.log('oldValue: ' + datoViejo + ', value:' + this.idInteres[index] );
-    //     }
-    // });
-    // if (this.idInteres.length > datosViejos.length){
-    //       console.log('se han añadido cambios:' + this.idInteres.splice(datosViejos.length, this.idInteres.length));
-    //     }
-      const datosComparados = compare(datosViejos, this.idInteres);
-      datosComparados.map((data2: any, index) => {
-        data2.oldValue=datosViejos[data2.path.split('/')[1]];
-        console.log(datosViejos[data2.path.split('/')[1]]);
-
+      contador++;
+    });
+    if (this.idInteres.length > datosViejos.length) {
+      const arrayCreations = this.idInteres.splice(datosViejos.length, this.idInteres.length);
+      console.log(arrayCreations);
+      arrayCreations.map(creation => {
+        this.changes.push({ op: 'add', value: creation });
       });
-      // console.log(datosComparados);
+    }
+    // console.log(this.changes);
+    // console.log(datosViejos);
+    // console.log(this.idInteres);
 
-      console.log(datosViejos);
-      console.log(this.idInteres);
-      // this.homeService.solicitudInteresEdit(this.datosRow.id,datosComparados).subscribe();
+    this.homeService.solicitudInteresEdit(this.datosRow.id, this.changes).subscribe();
   }
 
   formGroup(user){
