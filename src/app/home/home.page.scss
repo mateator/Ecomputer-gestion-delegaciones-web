@@ -18,7 +18,15 @@ ion-content {
   margin-right: 0.5em;
 }
 
-.filterButton {
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+.filterButton{
   position: relative;
   top: -60%;
   border: 1px solid black;
