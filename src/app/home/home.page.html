@@ -1,11 +1,11 @@
 <ion-header [translucent]="true" class="logout">
   <ion-toolbar>
     <ion-title *ngIf="!admin">
-      Kit Digital - {{delegacionUsuario[0]?.ubicacion}}
+      Kit Digital: {{delegacionUsuario[0]?.ubicacion}}
       <ion-button class="logout" color="light" (click)="logout()" > <ion-icon name="log-out-outline"></ion-icon> Logout</ion-button>
     </ion-title>
     <ion-title *ngIf="admin">
-      Kit Digital - ADMIN
+      Kit Digital: ADMIN
       <ion-button class="logout" color="light" (click)="logout()" ><ion-icon name="log-out-outline"></ion-icon> Logout</ion-button>
     </ion-title>
   </ion-toolbar>

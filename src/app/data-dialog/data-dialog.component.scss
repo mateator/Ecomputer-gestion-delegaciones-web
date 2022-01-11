@@ -10,6 +10,10 @@ ion-header{
 .iconos{
   pointer-events: none;
 }
-ion-icon, ion-grid{
+ ion-grid{
   font-size: 1.1em;
+  margin-left: 3em;
+}
+.iconos, ion-checkbox {
+  margin-right: 1em;
 }
