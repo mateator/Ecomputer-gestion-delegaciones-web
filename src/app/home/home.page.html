@@ -151,11 +151,9 @@
     </ng-container>
 
     <!-- Data of Sede -->
-    <ng-container matColumnDef="asignado">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header > ASIGNADO </th>
-      <td mat-cell *matCellDef="let row" >
-        <ion-checkbox [disabled]="true" checked="{{row.asignado}}"></ion-checkbox>
-      </td>
+    <ng-container matColumnDef="comercial">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > COMERCIAL </th>
+      <td mat-cell *matCellDef="let row" >{{row.comercial}}</td>
     </ng-container>
 
     <ng-container matColumnDef="delegacion" *ngIf="admin">
@@ -163,11 +161,12 @@
       <td mat-cell *matCellDef="let row" >{{row.delegacion.ubicacion}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="comercial">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header > COMERCIAL </th>
-      <td mat-cell *matCellDef="let row" >{{row.comercial}}</td>
+    <ng-container matColumnDef="asignado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > ASIGNADO </th>
+      <td mat-cell *matCellDef="let row" >
+        <ion-checkbox [disabled]="true" checked="{{row.asignado}}"></ion-checkbox>
+      </td>
     </ng-container>
-
 
     <!-- header of Sede -->
     <ng-container matColumnDef="estado">

@@ -1,6 +1,5 @@
 ion-content {
-  --ion-background-color: none;
-  background-image: url("./../../assets/img/asanoha-400px.png");
+  --ion-background-color: #EEEFF0;
 }
 .filterForm mat-form-field {
   width: 90%;
@@ -78,6 +77,12 @@ ion-header {
 table tr:nth-child(4) th {
   background-color: #19375d52;
 }
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}
+
 .tableDiv,
 mat-paginator {
   width: 95%;
@@ -93,10 +98,7 @@ mat-paginator {
   border: 1.3px solid gray;
   border-top: none;
 }
-th.mat-header-cell {
-  text-align: center;
-}
-td {
+th.mat-header-cell, td {
   text-align: center;
 }
 ion-icon {
@@ -117,3 +119,5 @@ td span,
 .logout {
   float: right;
 }
+
+

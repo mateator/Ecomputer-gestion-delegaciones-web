@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class HomePage implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   clicked = false;
   filtersForm: FormGroup;
@@ -31,7 +33,7 @@ export class HomePage implements OnInit {
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit() {
-    this.displayedColumnsData = ['asignado', 'delegacion', 'comercial', 'contactado', 'presupuestado', 'tramitado',
+    this.displayedColumnsData = ['delegacion', 'comercial', 'asignado', 'contactado', 'presupuestado', 'tramitado',
       'cliente', 'email', 'seeMoreData'];
     if (sessionStorage.getItem('rol') === 'USER') {
       this.displayedColumnsData = this.displayedColumnsData.filter(data => data !== 'delegacion');
@@ -71,6 +73,8 @@ export class HomePage implements OnInit {
     this.homeService.getSolicitudesId().subscribe((datos: any) => {
       this.data = new MatTableDataSource(datos);
       this.data.paginator = this.paginator;
+      this.data.sort = this.sort;
+
     });
     const delegacion = sessionStorage.getItem('idDelegacion');
     if (this.admin) {
