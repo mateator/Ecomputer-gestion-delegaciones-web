@@ -7,13 +7,12 @@ ion-header{
   width: 80%;
   text-align: center;
 }
-.iconos{
+.iconos, ion-checkbox{
   pointer-events: none;
+  margin-right: 1em;
+  color: #19375d;
 }
  ion-grid{
   font-size: 1.1em;
   margin-left: 3em;
-}
-.iconos, ion-checkbox {
-  margin-right: 1em;
 }

@@ -1,20 +1,17 @@
 ion-content {
   --ion-background-color: #EEEFF0;
 }
+
+//cabecera main con logout
+ion-header {
+  line-height: 2.6em;
+  --ion-background-color: #19375d;
+  --ion-text-color: white;
+}
+
 .filterForm mat-form-field {
   width: 90%;
   color: #19375d;
-}
-
-.tableHeader {
-  background-color: #19375d;
-  color: white;
-  border-bottom: 0.0000001px solid gray;
-}
- ion-checkbox{
-  position: relative;
-  top: 0.35em;
-  margin-right: 0.5em;
 }
 
 input:-webkit-autofill,
@@ -24,7 +21,25 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
 
+//cabecera de la tabla
+.tableHeader {
+  background-color: #19375d;
+  color: white;
+  border-bottom: 0.0000001px solid gray;
+}
 
+//color fondo filtros y cabeceras de la tabla
+.tableHeaderFilter, table tr:nth-child(4) th {
+  background-color: #19375d52;
+}
+
+//if not admin put delegacion field position
+.interesField {
+  position: relative;
+  top: -60%;
+}
+
+//boton filtrar
 .filterButton{
   position: relative;
   top: -60%;
@@ -34,21 +49,31 @@ input:-webkit-autofill:active {
   width: 70%;
 }
 
-//if not admin
-.interesField {
-  position: relative;
-  top: -60%;
+//a los filtros, el checkbox
+.filterForm ion-checkbox{
+  pointer-events: none;
 }
 
-.tableHeaderFilter {
-  background-color: #19375d52;
+th.mat-header-cell, td {
+  text-align: center;
 }
 
-ion-header {
-  line-height: 2.6em;
-  --ion-background-color: #19375d;
-  --ion-text-color: white;
+th span,
+td span,
+.logout ion-icon {
+  margin-right: 0.8em;
 }
+.header-row {
+  background-color: #19375d;
+}
+.header-row th {
+  color: white;
+}
+.logout {
+  float: right;
+}
+
+//puntero
 .cursorClick,
 .filterButtonActions {
   cursor: pointer;
@@ -56,6 +81,30 @@ ion-header {
 .filterButtonActions:hover {
   font-size: 1.1em;
 }
+
+//tabla
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}
+ion-checkbox{
+  position: relative;
+  top: 0.35em;
+  margin-right: 0.5em;
+  pointer-events: none;
+}
+.tableDiv,
+mat-paginator {
+  width: 95%;
+  margin: auto;
+}
+.tableDiv {
+  margin-top: 1em;
+  border: 1.3px solid gray;
+  border-bottom: none;
+}
+
+//iconos
 .iconoVer {
   pointer-events: none;
   color: #402bff;
@@ -74,50 +123,12 @@ ion-header {
   color: #c00000;
 }
 
-table tr:nth-child(4) th {
-  background-color: #19375d52;
-}
-
-::ng-deep .mat-sort-header-container {
-  display:flex;
-  justify-content:center;
-}
-
-.tableDiv,
-mat-paginator {
-  width: 95%;
-  margin: auto;
-}
-.tableDiv {
-  margin-top: 1em;
-  border: 1.3px solid gray;
-  border-bottom: none;
-}
 mat-paginator {
   margin-bottom: 1em;
   border: 1.3px solid gray;
   border-top: none;
 }
-th.mat-header-cell, td {
-  text-align: center;
-}
+
 ion-icon {
   font-size: 1.25em;
 }
-th span,
-td span,
-.logout ion-icon {
-  margin-right: 0.8em;
-}
-
-.header-row {
-  background-color: #19375d;
-}
-.header-row th {
-  color: white;
-}
-.logout {
-  float: right;
-}
-
-

@@ -32,14 +32,13 @@ export class DataDialogComponent implements OnInit {
 
         if(arrayFiltrado[0] !== undefined){
           this.interes.push(arrayFiltrado[0].tipo);
-          console.log(arrayFiltrado);
+          // console.log(arrayFiltrado);
 
         }
       });
-      //buscar otro modo para reemplazar esto
       this.interes.splice(0,this.interes.length/2);
-      console.log(this.interes.length);
-      console.log(this.interes);
+      // console.log(this.interes.length);
+      // console.log(this.interes);
 
 
       this.interes = [...this.interes];

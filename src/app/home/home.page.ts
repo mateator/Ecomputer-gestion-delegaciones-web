@@ -33,8 +33,10 @@ export class HomePage implements OnInit {
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit() {
+
     this.displayedColumnsData = ['delegacion', 'comercial', 'asignado', 'contactado', 'presupuestado', 'tramitado',
       'cliente', 'email', 'seeMoreData'];
+
     if (sessionStorage.getItem('rol') === 'USER') {
       this.displayedColumnsData = this.displayedColumnsData.filter(data => data !== 'delegacion');
       this.admin = false;
@@ -44,6 +46,7 @@ export class HomePage implements OnInit {
     this.getIntereses();
     this.filtersForm = this.formGroup({});
     this.getDelegacionUser();
+
   }
 
   getDelegaciones(){
@@ -58,7 +61,6 @@ export class HomePage implements OnInit {
     if(!this.admin){
       const delegacion=parseInt(sessionStorage.getItem('idDelegacion'),10);
       this.delegacionUsuario=this.delegaciones.filter(d=> d.id === delegacion);
-      console.log(this.delegacionUsuario);
     }
   }
 
@@ -77,6 +79,7 @@ export class HomePage implements OnInit {
 
     });
     const delegacion = sessionStorage.getItem('idDelegacion');
+
     if (this.admin) {
       HomeServiceService.tableData$.next();
     } else {
