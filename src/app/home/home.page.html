@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" class="logout">
   <ion-toolbar>
     <ion-title *ngIf="!admin">
-      Kit Digital - {{data[0]?.delegacion.ubicacion}}
+      Kit Digital - {{delegacionUsuario[0]?.ubicacion}}
       <ion-button class="logout" color="light" (click)="logout()" > <ion-icon name="log-out-outline"></ion-icon> Logout</ion-button>
     </ion-title>
     <ion-title *ngIf="admin">
@@ -14,7 +14,7 @@
 <ion-content>
   <table class="tableDiv" mat-table [dataSource]="data" matSort>
     <ng-container matColumnDef="description" class="tableHeader">
-      <th class="tableHeader" [attr.colspan]="admin ? 8:7"   *matHeaderCellDef><h2>Tabla de Solicitudes</h2></th>
+      <th class="tableHeader" [attr.colspan]="admin ? 8 : 7"   *matHeaderCellDef><h2>Tabla de Solicitudes</h2></th>
     </ng-container>
     <!-- icons -->
     <ng-container matColumnDef="add" >

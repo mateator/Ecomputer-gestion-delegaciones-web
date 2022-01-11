@@ -1,13 +1,17 @@
 ion-content{
-  --background: #d3ceff;
+  --ion-background-color: #EEEFF0;
+
 }
 ion-header{
   --ion-background-color: #19375d;
   --ion-text-color: white;
   text-align: center;
 }
+
 #container{
   text-align: center;
+
+  background-color: white;
   overflow: visible;
   top: 25%;
   width: 350px;
@@ -25,7 +29,7 @@ ion-header{
 #imagen {
 
   position: absolute;
-  background-color: #d3ceff;
+  background-color: #EEEFF0;
   width: 50%;
   padding: 10px;
   border-radius: 33%;
@@ -52,4 +56,5 @@ ion-header{
 ion-icon{
   font-size: 30px;
   padding-top: 15px;
+  color: #19375d;
 }

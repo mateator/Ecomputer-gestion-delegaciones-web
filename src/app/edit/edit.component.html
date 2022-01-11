@@ -50,7 +50,7 @@
           <ion-col size-xs=12 size-xl="6">
             <mat-form-field appearance="outline" class="izquierda">
               <mat-label>Telefono</mat-label>
-              <input type="number" matInput formControlName="telefono" pattern="[0-9]{9}">
+              <input type="number" matInput formControlName="telefono">
             </mat-form-field>
           </ion-col>
 
@@ -104,6 +104,7 @@
 
         <ion-row>
           <ion-col>
+            <!-- [disabled]="!editForm.valid" -->
             <br><ion-button color="warning" [disabled]="!editForm.valid" (click)="edit()" >GUARDAR</ion-button>
           </ion-col>
         </ion-row>

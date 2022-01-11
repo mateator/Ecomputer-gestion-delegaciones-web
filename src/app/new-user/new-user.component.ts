@@ -21,7 +21,6 @@ export class NewUserComponent implements OnInit {
     this.getIntereses();
     this.getDelegacion();
     this.newUserForm=this.formGroup(this.newUserForm);
-
   }
 
   //recoge todos los intereses
@@ -43,16 +42,19 @@ export class NewUserComponent implements OnInit {
     this.newUserForm.value.delegacionId=parseInt(this.newUserForm.value.delegacionId,10);
     this.homeService.createSolicitud(this.newUserForm.value).subscribe((data: any) => {
         //recorrer para crear el interes
-        this.newUserForm.value.interes.map((dato) => {
-        this.createInteresSolicitud(data.data.id,dato);
+        this.newUserForm.value.interes.map((dato, index) => {
+        this.createInteresSolicitud(data.data.id,dato, index);
       });
     });
-    HomeServiceService.tableData$.next();
-    this.router.navigate(['/home']);
   }
 
-  createInteresSolicitud(data,id){
-    this.homeService.createInteresSolicitud(data,id).subscribe();
+  createInteresSolicitud(data,id, index){
+    this.homeService.createInteresSolicitud(data,id).subscribe(dato=>{
+      if(this.newUserForm.value.interes.length -1 === index){
+        HomeServiceService.tableData$.next();
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   selected(){
@@ -69,7 +71,6 @@ export class NewUserComponent implements OnInit {
           this.seleccionados.push(arrayFiltrado[0].tipo);
         }
       });
-      //buscar otro modo para reemplazar esto
       this.seleccionados.splice(0,this.seleccionados.length/2);
       this.seleccionados = [...this.seleccionados];
     });

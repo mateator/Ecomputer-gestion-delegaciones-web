@@ -44,7 +44,6 @@ export class EditComponent implements OnInit {
 
         this.editForm.value.interes.push(...interes);
         this.interes.push(parseInt(data2.interesId,10));
-
       });
       this.editForm.value.interes.id=this.interes;
 
@@ -56,7 +55,6 @@ export class EditComponent implements OnInit {
   edit(){
     this.edited();
     // this.replaceToString();
-
     this.editForm.value.delegacionId=parseInt(this.editForm.value.delegacionId,10);
     this.homeService.editSolicitud(this.datosRow.id,this.editForm.value).subscribe((data) => {
       HomeServiceService.tableData$.next();
@@ -68,7 +66,6 @@ export class EditComponent implements OnInit {
     this.homeService.getDelegacion().subscribe((data: any) => {
       this.delegaciones=data;
     this.editForm.get('delegacionId').setValue( this.datosRow.delegacionId.toString());
-
     });
   }
 
@@ -87,17 +84,16 @@ export class EditComponent implements OnInit {
 
   replaceToString(){
     //reemplaza los ids mostrados en pantalla por los nombres
-      this.seleccionados.map(interesId =>{
-        const arrayFiltrado = this.intereses.filter(interesDeApi => interesDeApi.id=== interesId);
+    this.seleccionados.map(interesId =>{
+      const arrayFiltrado = this.intereses.filter(interesDeApi => interesDeApi.id=== interesId);
 
-        if(arrayFiltrado[0] !== undefined){
-          this.seleccionados.push(arrayFiltrado[0].tipo);
-
-        }
-      });
-      this.seleccionados.splice(0,this.seleccionados.length/2);
-      this.seleccionados = [...this.seleccionados];
-    }
+      if(arrayFiltrado[0] !== undefined){
+        this.seleccionados.push(arrayFiltrado[0].tipo);
+      }
+    });
+    this.seleccionados.splice(0,this.seleccionados.length/2);
+    this.seleccionados = [...this.seleccionados];
+  }
 
   edited() {
     const datosViejos = this.datosRow.solicitudInteres.map((data) =>
@@ -117,9 +113,7 @@ export class EditComponent implements OnInit {
           // console.log('ha habido un delete:' + datoViejo);
           this.changes.push({ op: 'remove', oldValue: datoViejo });
           contador2++;
-
         } else {
-
           let copiaContador = contador2;
           // console.log(copiaContador - contador2);
           // console.log(this.idInteres[copiaContador - contador2]);
@@ -131,14 +125,12 @@ export class EditComponent implements OnInit {
 
           // console.log('ha habido un remplazo de ' + datoViejo + 'con:' + this.idInteres[copiaContador - contador2]);
           this.changes.push({ op: 'replace', value: this.idInteres[copiaContador - contador2], oldValue: datoViejo });
-
         }
       }
       contador++;
     });
     if (this.idInteres.length > datosViejos.length) {
       // console.log('s');
-
       const arrayCreations = this.idInteres;
       arrayCreations.map(creation => {
 

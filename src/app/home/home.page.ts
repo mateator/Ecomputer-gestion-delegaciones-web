@@ -1,3 +1,4 @@
+import { LoginService } from './../services/login.service';
 import { DeleteDialogComponent } from './../delete-dialog/delete-dialog.component';
 import { HomeServiceService } from './../services/home-service.service';
 import { DataDialogComponent } from './../data-dialog/data-dialog.component';
@@ -21,12 +22,11 @@ export class HomePage implements OnInit {
   admin = true;
   displayedColumnsData: string[];
   data: MatTableDataSource<any>;
-  data2 = [];
-  delegaciones;
+  delegaciones = [];
+  delegacionUsuario =[];
   intereses;
   arrayfiltros={asignado: undefined, delegacionId: undefined, comercial:undefined, contactado: undefined,
-     presupuestado: undefined, tramitado: undefined, cliente: undefined, interesId: undefined};
-
+  presupuestado: undefined, tramitado: undefined, cliente: undefined, interesId: undefined};
 
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
 
@@ -41,15 +41,23 @@ export class HomePage implements OnInit {
     this.getSolicitudesId();
     this.getIntereses();
     this.filtersForm = this.formGroup({});
-
+    this.getDelegacionUser();
   }
 
   getDelegaciones(){
-    this.homeService.getDelegacion().subscribe((delegacion) => {
+    this.homeService.getDelegacion().subscribe((delegacion: any) => {
       this.delegaciones=delegacion;
       // console.log(delegacion);
-
+      this.getDelegacionUser();
     });
+  }
+
+  getDelegacionUser(){
+    if(!this.admin){
+      const delegacion=parseInt(sessionStorage.getItem('idDelegacion'),10);
+      this.delegacionUsuario=this.delegaciones.filter(d=> d.id === delegacion);
+      console.log(this.delegacionUsuario);
+    }
   }
 
   getIntereses(){
@@ -58,13 +66,11 @@ export class HomePage implements OnInit {
     });
   }
 
-
   //recoge las delegaciones del id que se le pasen
   getSolicitudesId() {
     this.homeService.getSolicitudesId().subscribe((datos: any) => {
-      this.data = this.data = new MatTableDataSource(datos);
+      this.data = new MatTableDataSource(datos);
       this.data.paginator = this.paginator;
-
     });
     const delegacion = sessionStorage.getItem('idDelegacion');
     if (this.admin) {
@@ -76,20 +82,16 @@ export class HomePage implements OnInit {
 
   //accion al darle al boton de aplicar filtros
   filtrar(){
-    // this.arrayfiltros.asignado
     Object.keys(this.filtersForm.value).map(m => {
       if (this.filtersForm.value[m] === null || this.filtersForm.value[m] === undefined|| this.filtersForm.value[m] === '') {
         delete this.filtersForm.value[m];
       }
     });
-    // console.log(this.filtersForm.value);
+    if (!this.admin){
+      this.arrayfiltros.delegacionId=parseInt(sessionStorage.getItem('idDelegacion'),10);
+      this.filtersForm.value.delegacionId=this.arrayfiltros.delegacionId;
+    }
     HomeServiceService.tableData$.next(this.filtersForm.value);
-
-  }
-
-  //paginator
-  changePage(event: PageEvent) {
-
   }
 
   //redirecciona al formulario de crear
@@ -131,7 +133,6 @@ export class HomePage implements OnInit {
 
   formGroup(data) {
     // console.log(data);
-
     return new FormGroup({
       asignado: new FormControl(undefined),
       comercial: new FormControl(undefined),

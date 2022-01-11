@@ -1,10 +1,13 @@
+import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -12,11 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    loadChildren: () => import('./new-user/new-user.module').then( m => m.NewUserModule)
+    loadChildren: () => import('./new-user/new-user.module').then( m => m.NewUserModule),
+    canActivate: [AdminGuard]
   },
   {
     path: 'edit',
-    loadChildren: () => import('./edit/edit.module').then( m => m.EditModule)
+    loadChildren: () => import('./edit/edit.module').then( m => m.EditModule),
+    canActivate: [AdminGuard]
   },
   {
     path: 'data-dialog',
@@ -24,8 +29,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    //change home for login
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
 ];
