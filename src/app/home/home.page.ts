@@ -8,8 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { take } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +30,9 @@ export class HomePage implements OnInit, OnDestroy {
   intereses;
   arrayfiltros={asignado: undefined, delegacionId: undefined, comercial:undefined, contactado: undefined,
   presupuestado: undefined, tramitado: undefined, cliente: undefined, interesId: undefined};
+
   private readonly destroy$ = new Subject();
+
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
 
 
@@ -100,7 +102,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   //recoge las delegaciones del id que se le pasen
   getSolicitudesId() {
-    this.homeService.getSolicitudesId().pipe(take(1)).subscribe((datos: any) => {
+    this.homeService.getSolicitudesId().pipe(takeUntil(this.destroy$)).subscribe((datos: any) =>{
       this.data = new MatTableDataSource(datos);
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
@@ -126,6 +128,8 @@ export class HomePage implements OnInit, OnDestroy {
       this.arrayfiltros.delegacionId=parseInt(sessionStorage.getItem('idDelegacion'),10);
       this.filtersForm.value.delegacionId=this.arrayfiltros.delegacionId;
     }
+    console.log(this.filtersForm.value);
+
     HomeServiceService.tableData$.next(this.filtersForm.value);
   }
 
