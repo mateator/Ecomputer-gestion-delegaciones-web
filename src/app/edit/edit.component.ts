@@ -57,7 +57,6 @@ export class EditComponent implements OnInit {
     // this.replaceToString();
     this.editForm.value.delegacionId=parseInt(this.editForm.value.delegacionId,10);
     this.homeService.editSolicitud(this.datosRow.id,this.editForm.value).subscribe((data) => {
-      HomeServiceService.tableData$.next();
       this.router.navigate(['/home']);
     });
   }

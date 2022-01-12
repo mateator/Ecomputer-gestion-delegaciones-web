@@ -1,21 +1,22 @@
-import { LoginService } from './../services/login.service';
 import { DeleteDialogComponent } from './../delete-dialog/delete-dialog.component';
 import { HomeServiceService } from './../services/home-service.service';
 import { DataDialogComponent } from './../data-dialog/data-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { take } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -29,8 +30,21 @@ export class HomePage implements OnInit {
   intereses;
   arrayfiltros={asignado: undefined, delegacionId: undefined, comercial:undefined, contactado: undefined,
   presupuestado: undefined, tramitado: undefined, cliente: undefined, interesId: undefined};
-
+  private readonly destroy$ = new Subject();
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
+
+
+  ngOnDestroy(): void {
+    console.log('asdas');
+    console.log(this.destroy$);
+
+    this.destroy$.next();
+    this.destroy$.complete();
+    console.log(this.destroy$);
+
+    console.log('f');
+
+  }
 
   ngOnInit() {
     this.generateTable();
@@ -86,7 +100,7 @@ export class HomePage implements OnInit {
 
   //recoge las delegaciones del id que se le pasen
   getSolicitudesId() {
-    this.homeService.getSolicitudesId().subscribe((datos: any) => {
+    this.homeService.getSolicitudesId().pipe(take(1)).subscribe((datos: any) => {
       this.data = new MatTableDataSource(datos);
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
@@ -131,6 +145,7 @@ export class HomePage implements OnInit {
 
   //recoge los datos para el editar
   edit(datosRow) {
+    this.ngOnDestroy();
     this.homeService.datosFila = datosRow;
     this.router.navigate(['/edit']);
   }

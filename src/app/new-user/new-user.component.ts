@@ -51,7 +51,6 @@ export class NewUserComponent implements OnInit {
   createInteresSolicitud(data,id, index){
     this.homeService.createInteresSolicitud(data,id).subscribe(dato=>{
       if(this.newUserForm.value.interes.length -1 === index){
-        HomeServiceService.tableData$.next();
         this.router.navigate(['/home']);
       }
     });
