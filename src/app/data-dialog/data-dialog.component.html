@@ -59,19 +59,23 @@
       </span>
     </ion-col>
   </ion-row>
+  <ion-row  size-xs="12" size-lg="6">
+    <ion-col>
+      <span title="observaciones">
+      <ion-icon name="eye-outline" class="iconos"></ion-icon> {{data.observaciones}}
+      </span>
+    </ion-col>
+    <ion-col  size-xs="12" size-lg="6">
+      <span title="Agente Digital">
+      <ion-icon name="briefcase" class="iconos"></ion-icon> {{data.agenteDigital}}
+      </span>
+    </ion-col>
+  </ion-row>
   <ion-row size="12">
     <ion-col>
       <p class="interesTitulo">INTERESES</p>
     </ion-col>
   </ion-row>
-
-  <!-- <ion-row>
-    <ion-col size="6">
-      <ion-select-option *ngFor="let element of interes" value="{{element}}">
-        {{element}}
-      </ion-select-option>
-    </ion-col>
-  </ion-row> -->
 
   <ion-row>
     <ion-col *ngFor="let element of interes" size-xs="6">

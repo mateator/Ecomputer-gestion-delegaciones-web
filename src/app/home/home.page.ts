@@ -51,13 +51,13 @@ export class HomePage implements OnInit {
 
   generateTable(){
     if (sessionStorage.getItem('rol') === 'USER') {
-      this.displayedColumnsData = ['asignado', 'contactado', 'presupuestado', 'tramitado',
+      this.displayedColumnsData = ['agenteDigital','asignado', 'contactado', 'presupuestado', 'tramitado',
       'cliente', 'email', 'seeMoreData'];
       this.admin = false;
 
     }
     else if (sessionStorage.getItem('rol') === 'ADMIN'){
-      this.displayedColumnsData = ['delegacion', 'comercial', 'asignado', 'contactado', 'presupuestado', 'tramitado',
+      this.displayedColumnsData = ['delegacion', 'comercial','agenteDigital', 'asignado', 'contactado', 'presupuestado', 'tramitado',
       'cliente', 'email', 'seeMoreData'];
       this.admin = true;
     }
@@ -157,6 +157,7 @@ export class HomePage implements OnInit {
     return new FormGroup({
       asignado: new FormControl(undefined),
       comercial: new FormControl(undefined),
+      agenteDigital: new FormControl(undefined),
       contactado: new FormControl(undefined),
       delegacionId: new FormControl(undefined),
       presupuestado: new FormControl(undefined),

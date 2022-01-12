@@ -94,11 +94,20 @@
               </mat-select>
             </mat-form-field>
           </ion-col>
-          <ion-col size-xs=12>
+          </ion-row>
+
+          <ion-row>
+          <ion-col size-xs=12 size-xl="6">
             <mat-form-field appearance="outline" class="centro">
               <mat-label>observaciones</mat-label>
               <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
                 formControlName="observaciones"></textarea>
+            </mat-form-field>
+          </ion-col>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="centro">
+              <mat-label>Agente Digital</mat-label>
+              <input type="text" matInput formControlName="agenteDigital">
             </mat-form-field>
           </ion-col>
         </ion-row>

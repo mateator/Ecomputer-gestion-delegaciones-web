@@ -161,7 +161,8 @@ export class EditComponent implements OnInit {
       telefono: new FormControl(user.telefono, Validators.required),
       email: new FormControl(user.email, Validators.required),
       interes: new FormControl(user.solicitudInteres, Validators.required),
-      observaciones: new FormControl(user.observaciones)
+      observaciones: new FormControl(user.observaciones),
+      agenteDigital: new FormControl(user.agenteDigital, Validators.required)
     });
   }
 }

@@ -90,7 +90,8 @@ export class NewUserComponent implements OnInit {
       telefono: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
       interes: new FormControl('', Validators.required),
-      observaciones: new FormControl('')
+      observaciones: new FormControl(''),
+      agenteDigital: new FormControl(user.agenteDigital, Validators.required)
     });
   }
 }
