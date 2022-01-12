@@ -91,7 +91,7 @@ export class NewUserComponent implements OnInit {
       email: new FormControl('', Validators.required),
       interes: new FormControl('', Validators.required),
       observaciones: new FormControl(''),
-      agenteDigital: new FormControl(user.agenteDigital, Validators.required)
+      agenteDigital: new FormControl('', Validators.required)
     });
   }
 }
