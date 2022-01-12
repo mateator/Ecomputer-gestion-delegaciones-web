@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
 
   clicked = false;
   filtersForm: FormGroup;
-  admin = true;
+  admin: boolean;
   displayedColumnsData: string[];
   data: MatTableDataSource<any>;
   delegaciones = [];
@@ -33,20 +33,34 @@ export class HomePage implements OnInit {
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit() {
-
-    this.displayedColumnsData = ['delegacion', 'comercial', 'asignado', 'contactado', 'presupuestado', 'tramitado',
-      'cliente', 'email', 'seeMoreData'];
-
-    if (sessionStorage.getItem('rol') === 'USER') {
-      this.displayedColumnsData = this.displayedColumnsData.filter(data => data !== 'delegacion');
-      this.admin = false;
-    }
+    this.generateTable();
     this.getDelegaciones();
-    this.getSolicitudesId();
     this.getIntereses();
+
     this.filtersForm = this.formGroup({});
+
+  }
+
+  ionViewWillEnter(){
+
+    this.generateTable();
+    this.getSolicitudesId();
     this.getDelegacionUser();
 
+  }
+
+  generateTable(){
+    if (sessionStorage.getItem('rol') === 'USER') {
+      this.displayedColumnsData = ['asignado', 'contactado', 'presupuestado', 'tramitado',
+      'cliente', 'email', 'seeMoreData'];
+      this.admin = false;
+
+    }
+    else if (sessionStorage.getItem('rol') === 'ADMIN'){
+      this.displayedColumnsData = ['delegacion', 'comercial', 'asignado', 'contactado', 'presupuestado', 'tramitado',
+      'cliente', 'email', 'seeMoreData'];
+      this.admin = true;
+    }
   }
 
   getDelegaciones(){
