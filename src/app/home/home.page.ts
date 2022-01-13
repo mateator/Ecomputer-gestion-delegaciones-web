@@ -102,13 +102,7 @@ export class HomePage implements OnInit {
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
     });
-    const delegacion = sessionStorage.getItem('idDelegacion');
-
-    if (this.admin) {
-      HomeServiceService.tableData$.next();
-    } else {
-      HomeServiceService.tableData$.next({delegacionId: parseInt(delegacion,10)});
-    }
+    this.actualizarTabla();
   }
 
   //accion al darle al boton de aplicar filtros
@@ -122,7 +116,6 @@ export class HomePage implements OnInit {
       this.arrayfiltros.delegacionId=parseInt(sessionStorage.getItem('idDelegacion'),10);
       this.filtersForm.value.delegacionId=this.arrayfiltros.delegacionId;
     }
-    console.log(this.filtersForm.value);
 
     HomeServiceService.tableData$.next(this.filtersForm.value);
   }
@@ -153,11 +146,18 @@ export class HomePage implements OnInit {
       data: row,
       width: '30%',
     });
-    dialog.afterClosed().subscribe(data => {
-      this.getSolicitudesId();
+    this.subscription=dialog.afterClosed().subscribe(data => {
+      this.actualizarTabla();
     });
   }
-
+  actualizarTabla(){
+    const delegacion = sessionStorage.getItem('idDelegacion');
+    if (this.admin) {
+      HomeServiceService.tableData$.next();
+    } else {
+      HomeServiceService.tableData$.next({delegacionId: parseInt(delegacion,10)});
+    }
+  }
   //cierra sesion y redirecciona al login
   logout() {
     sessionStorage.clear();
