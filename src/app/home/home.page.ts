@@ -2,7 +2,7 @@ import { DeleteDialogComponent } from './../delete-dialog/delete-dialog.componen
 import { HomeServiceService } from './../services/home-service.service';
 import { DataDialogComponent } from './../data-dialog/data-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -33,20 +33,11 @@ export class HomePage implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject();
 
+  private subscription;
+
   constructor(private homeService: HomeServiceService, private dialog: MatDialog, private router: Router) {}
 
 
-  ngOnDestroy(): void {
-    console.log('asdas');
-    console.log(this.destroy$);
-
-    this.destroy$.next();
-    this.destroy$.complete();
-    console.log(this.destroy$);
-
-    console.log('f');
-
-  }
 
   ngOnInit() {
     this.generateTable();
@@ -63,6 +54,10 @@ export class HomePage implements OnInit, OnDestroy {
     this.getSolicitudesId();
     this.getDelegacionUser();
 
+  }
+
+  ionViewWillLeave(){
+    this.subscription.unsubscribe();
   }
 
   generateTable(){
@@ -102,11 +97,10 @@ export class HomePage implements OnInit, OnDestroy {
 
   //recoge las delegaciones del id que se le pasen
   getSolicitudesId() {
-    this.homeService.getSolicitudesId().pipe(takeUntil(this.destroy$)).subscribe((datos: any) =>{
+    this.subscription = this.homeService.getSolicitudesId().subscribe((datos: any) =>{
       this.data = new MatTableDataSource(datos);
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
-
     });
     const delegacion = sessionStorage.getItem('idDelegacion');
 
@@ -149,7 +143,6 @@ export class HomePage implements OnInit, OnDestroy {
 
   //recoge los datos para el editar
   edit(datosRow) {
-    this.ngOnDestroy();
     this.homeService.datosFila = datosRow;
     this.router.navigate(['/edit']);
   }
