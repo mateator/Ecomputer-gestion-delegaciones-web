@@ -1,0 +1,147 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <span class="title">
+        {{data.cliente}}
+      </span>
+      <ion-icon name="close-outline" (click)="closeDialog()" class="closeDialog"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header><br>
+
+<ion-grid>
+    <ion-row>
+      <ion-col size-xs=4 size-xl="4">
+        <mat-form-field appearance="outline">
+          <mat-label>Cliente</mat-label>
+          <input type="text" matInput readonly [value]="data.cliente">
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size-xs=4 size-xl="4">
+        <mat-form-field appearance="outline">
+          <mat-label>Contacto</mat-label>
+          <input type="text" readonly matInput [value]="data.contacto">
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size-xs=4 size-xl="4">
+        <mat-form-field appearance="outline">
+          <mat-label>Delegación</mat-label>
+          <input type="text" readonly matInput [value]="data.delegacion.ubicacion">
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-xs=3 size-xl="2.97">
+        <mat-form-field appearance="outline">
+          <mat-label>Localidad</mat-label>
+          <input type="text" readonly matInput [value]="data.localidad">
+        </mat-form-field>
+      </ion-col>
+      <ion-col size-xs=3 size-xl="2.98">
+        <mat-form-field appearance="outline">
+          <mat-label>Provincia</mat-label>
+          <input type="text" readonly matInput [value]="data.provincia">
+        </mat-form-field>
+      </ion-col>
+      <ion-col size-xs=3 size-xl="2.97">
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input type="text" matInput readonly [value]="data.telefono">
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size-xs=3 size-xl="2.98">
+        <mat-form-field appearance="outline" class="telefono2">
+          <mat-label>Teléfono 2</mat-label>
+          <input type="text" readonly matInput [value]="data.telefono2">
+        </mat-form-field>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-xs=3 size-xl="2.97">
+        <mat-form-field appearance="outline">
+          <mat-label>Segmento</mat-label>
+          <input type="text" matInput readonly [value]="data.segmento">
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size-xs=3 size-xl="2.98">
+        <mat-form-field appearance="outline">
+          <mat-label>Comercial</mat-label>
+          <input type="text" matInput readonly [value]="data.comercial">
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size-xs=3 size-xl="2.97">
+        <mat-form-field appearance="outline">
+          <mat-label>Agente Digital</mat-label>
+          <input type="text" readonly matInput [value]="data.agenteDigital">
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size-xs=3 size-xl="2.98">
+        <mat-form-field appearance="outline" class="email">
+          <mat-label>Email</mat-label>
+          <input type="text" matInput readonly [value]="data.email">
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-xs=3 size-xl="3">
+        <div id="disabledClick">
+          <mat-checkbox [checked]="data.asignado" color="primary">Asignado</mat-checkbox>
+        </div>
+      </ion-col>
+
+      <ion-col size-xs=3 size-xl="3">
+        <div id="disabledClick">
+          <mat-checkbox [checked]="data.contactado" color="primary">Contactado</mat-checkbox>
+        </div>
+      </ion-col>
+
+      <ion-col size-xs=3 size-lg="3">
+        <div id="disabledClick">
+          <mat-checkbox [checked]="data.presupuestado" color="primary">Presupuestado</mat-checkbox>
+        </div>
+      </ion-col>
+
+      <ion-col size-xs=3 size-xl="3">
+        <div id="disabledClick">
+          <mat-checkbox [checked]="data.tramitado" color="primary">Tramitado</mat-checkbox>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row size="12">
+      <ion-col>
+        <p class="observacionesTitulo">OBSERVACIONES</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row size-xl="12">
+      <ion-col>
+        <mat-form-field appearance="outline" class="textObservaciones">
+          <mat-label>Observaciones</mat-label>
+          <textarea readonly rows="3" matInput [value]="data.observaciones"></textarea>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row size="12">
+      <ion-col class="colInteresHeader">
+        <p class="interesTitulo">INTERESES</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngFor="let element of interes" size-xs="12" size-xl=3>
+        <p>{{element}}</p>
+      </ion-col>
+    </ion-row>
+</ion-grid>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 
@@ -10,23 +10,28 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginPage implements OnInit {
 
-  loginForm = FormGroup;
+  loginForm: FormGroup = new FormGroup({});
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      usuario: new FormControl(''),
+      password: new FormControl(''),
+      toggle: new FormControl(false),
+    });
     sessionStorage.clear();
-
   }
 
   login(form){
     this.loginService.validateLogin(form).subscribe((data: any)=>{
+      if (data.login === true ){
+        sessionStorage.setItem('rol' , data.user[0].rol);
 
-      if (data.login === true){
-        console.log('entra');
+        if(data.user[0].rol === 'USER'){
+          sessionStorage.setItem('idDelegacion' , data.user[0].delegacionId);
+        }
 
-        sessionStorage.setItem('rol' , data.rol);
         this.router.navigate(['/home']);
-
       }
     });
   }

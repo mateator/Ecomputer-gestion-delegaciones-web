@@ -1,53 +1,53 @@
-<ion-header>
-  <ion-toolbar color="dark">
-    <ion-title>Ecomputer</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-
 <ion-content>
-  <ion-card id="container">
-    <div id="imagen">
-      <img src="../../assets/img/logo.jpeg" alt="Avatar">
+  <div class="container">
+    <ion-card id="login">
+      <ion-img src="../assets/img/logo.jpeg" id="logo"></ion-img>
+      <div>
+      </div>
+      <ion-card id="credentials">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" >
+          <ion-grid id="grid">
+            <div class="responsiveContainer">
+              <ion-row>
+                <ion-col size="1.5" size-sm="1">
+                  <ion-icon name="person-outline"></ion-icon>
+                </ion-col>
 
-    </div>
-    <div id="login">
-      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="2">
-              <ion-icon name="person-outline"></ion-icon>
-            </ion-col>
+                <ion-col size="10.5" size-sm="11">
+                  <ion-item lines="none">
+                    <ion-label position="floating">Usuario</ion-label>
+                    <ion-input type="text" formControlName="usuario" required  > </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
 
-            <ion-col size="10">
-              <ion-item>
-                <ion-label position="floating">Usuario</ion-label>
-                <ion-input type="text" name="usuario" required ngModel> </ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+              <ion-row>
+                <ion-col size="1.5" size-sm="1">
+                  <ion-icon name="lock-closed-outline"></ion-icon>
+                </ion-col>
 
-          <ion-row>
-            <ion-col size="2">
-              <ion-icon name="key-outline"></ion-icon>
-            </ion-col>
+                <ion-col size="10.5" size-sm="11">
+                  <ion-item lines="none">
+                    <ion-label position="floating">Contraseña</ion-label>
+                    <ion-input type="password" formControlName="password" required  > </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
 
-            <ion-col size="10">
-              <ion-item>
-                <ion-label position="floating">Contraseña</ion-label>
-                <ion-input type="password" name="password" required ngModel > </ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+              <ion-row id="reminder">
+                <p>Recordar</p>
+                <ion-toggle formControlName="toggle"  checked></ion-toggle>
+              </ion-row>
+            </div>
 
-          <ion-button type="submit" color="tertiary" shape="round" expand="block" [disabled]="loginForm.invalid">LOGIN
-          </ion-button>
+            <ion-button type="submit" shape="round" fill="outline" id="submit"> <span class="buttonContent"> Acceder </span>
+            </ion-button>
 
-        </ion-grid>
+          </ion-grid>
 
-      </form>
+        </form>
+      </ion-card>
 
-    </div>
-
-  </ion-card>
+    </ion-card>
+  </div>
 </ion-content>

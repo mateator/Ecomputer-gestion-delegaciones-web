@@ -1,27 +1,205 @@
-#container {
+ion-content {
+  --ion-background-color: #eeeff0;
+}
+
+//cabecera main con logout
+ion-header {
+  line-height: 2.6em;
+  --ion-background-color: #19375d;
+  --ion-text-color: white;
+}
+
+.filterForm mat-form-field {
+  width: 90%;
+  color: #19375d;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+//cabecera de la tabla
+.tableHeader {
+  background-color: #19375d;
+  color: white;
+  border-bottom: 1px solid gray;
+}
+
+//color fondo filtros y cabeceras de la tabla
+table tr:nth-child(4) th {
+  background-color: #19375d52;
+  color: #19375d;
+}
+.tableHeaderFilter {
+  background-color: #dbdbdb;
+}
+//if not admin put button position
+.interesField {
+  position: relative;
+  top: -60%;
+}
+
+//boton filtrar al no ser admin
+.filterButton {
+  position: relative;
+  top: -60%;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 3em;
+  width: 13em;
+}
+.spanQuitarFiltro {
+  font-size: 3em;
+  position: relative;
+  display: inline-block;
+  top: -50%;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.5em;
+  cursor: pointer;
+  padding: none;
+}
+
+//boton filtrar al ser admin
+.filterButtonAdmin {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 5px;
+  top: -16%;
+  height: 3em;
+  width: 13em;
+}
+.spanQuitarFiltroAdmin {
+  font-size: 3em;
+  position: relative;
+  display: inline-block;
+  top: 11%;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.5em;
+  cursor: pointer;
+  padding: none;
+}
+
+//size del boton
+@media  (max-width: 1366px) {
+  .filterButton, .filterButtonAdmin {
+    width: 11em;
+  }
+}
+
+.deleteFilterIcon {
+  pointer-events: none;
+  color: #c00000;
+}
+
+//a los filtros, el checkbox
+.filterForm ion-checkbox {
+  pointer-events: none;
+}
+
+th.mat-header-cell,
+td {
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.header-row {
+  background-color: #19375d;
+}
+.header-row th {
+  color: white;
+}
+.logout {
+  float: right;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+//puntero
+.cursorClick,
+.filterButtonActions {
+  cursor: pointer;
+}
 
-  color: #8c8c8c;
+//tabla
+::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+ion-checkbox {
+  position: relative;
+  top: 0.35em;
+  margin-right: 0.5em;
+  pointer-events: none;
+}
+.tableDiv,
+mat-paginator {
+  width: 95%;
+  margin: auto;
+}
+.tableDiv {
+  margin-top: 1em;
+  border: 1.3px solid gray;
+  border-bottom: none;
+}
 
+//iconos
+.iconoVer {
+  font-size: 1.5em;
+  pointer-events: none;
+  color: #402bff;
+  margin-right: 0.10em;
+}
+.iconoCrear,
+.iconoFiltrar,
+.iconoExcel {
+  font-size: 1.5em;
+  pointer-events: none;
+  margin-right: 0.4em;
+
+  color: white;
+}
+.iconoLogout {
+  margin-right: 0.4em;
+}
+.iconoEditar {
+  margin-right: 0.10em;
+  font-size: 1.5em;
+  pointer-events: none;
+  color: orangered;
+}
+.iconoBorrar {
+  font-size: 1.5em;
+  pointer-events: none;
+  color: #c00000;
+}
+.filterButtonActions:hover .iconoCrear,
+.filterButtonActions:hover .iconoFiltrar,
+.filterButtonActions:hover .iconoExcel {
+  color: #b8b8b8;
+}
+mat-paginator {
+  margin-bottom: 1em;
+  border: 1.3px solid gray;
+  border-top: none;
+}
+
+::ng-deep.mat-form-field-outline {
+  box-shadow: 0 0px 0px 0 rgb(0 0 0 / 20%), 0px 0.5px 0px 0px rgb(0 0 0 / 19%);
+  background-color: white;
   margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+.filterGrid ion-row:first-child {
+  padding-top: 1.2em;
 }
 
-#container a {
-  text-decoration: none;
+.headerType {
+  font-size: 1em;
+}
+
+.accionesHeader{
+  width: 9em;
 }

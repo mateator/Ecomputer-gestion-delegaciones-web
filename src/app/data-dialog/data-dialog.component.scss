@@ -1,0 +1,50 @@
+ion-header{
+  text-align: center;
+  --ion-background-color: #19375d;
+  --ion-text-color: white;
+}
+.interesTitulo, .observacionesTitulo{
+  width: 100%;
+  text-align: center;
+  color: black;
+}
+.observacionesTitulo{
+  margin-top: 2em;
+}
+ion-checkbox, mat-checkbox{
+  pointer-events: none;
+  margin-right: 1em;
+  color: #19375d;
+}
+mat-form-field{
+  width: 90%;
+  color: #19375d;
+}
+mat-label{
+  color: #19375d;
+}
+ion-checkbox{
+  position: relative;
+  top: 0.2em;
+}
+ ion-grid{
+  margin-left: 3em;
+}
+.disabledClick{
+  pointer-events: none;
+}
+.textObservaciones{
+  width: 97%;
+}
+p{
+  color: #19375d;
+}
+.closeDialog{
+  color: white;
+  float: right;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.title{
+  vertical-align: middle;
+}

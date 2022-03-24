@@ -1,0 +1,168 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>CREAR SOLICITUD</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container class="createForm">
+    <form [formGroup]="newUserForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="izquierda">
+              <mat-label>
+                Delegación
+              </mat-label>
+              <mat-select formControlName="delegacionId">
+                <mat-option (click)="asignadoChecked()" *ngFor="let element of delegaciones" value="{{element.id}}">{{element.ubicacion}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="derecha">
+              <mat-label>Comercial</mat-label>
+              <input type="text" matInput formControlName="comercial">
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="izquierda">
+              <mat-label>Cliente</mat-label>
+              <input type="text" matInput formControlName="cliente">
+            </mat-form-field>
+          </ion-col>
+
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="derecha">
+              <mat-label>Contacto</mat-label>
+              <input type="text" matInput formControlName="contacto">
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="izquierda">
+              <mat-label>Localidad</mat-label>
+              <input type="text" matInput formControlName="localidad">
+            </mat-form-field>
+          </ion-col>
+
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="derecha">
+              <mat-label>Provincia</mat-label>
+              <input type="text" matInput formControlName="provincia">
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="izquierda">
+              <mat-label>Email</mat-label>
+              <input type="email" email="true" matInput formControlName="email">
+            </mat-form-field>
+          </ion-col>
+
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="derecha">
+              <mat-label>
+                Segmento
+              </mat-label>
+              <mat-select formControlName="segmento">
+                <mat-option *ngFor="let segmento of segmentos" value="{{segmento}}"><b>{{segmento}}</b> Empleados</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="izquierda">
+              <mat-label>Telefono</mat-label>
+              <input type="number" matInput formControlName="telefono">
+            </mat-form-field>
+          </ion-col>
+
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="derecha">
+              <mat-label>Telefono 2 (opcional)</mat-label>
+              <input type="number" matInput formControlName="telefono2">
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="6" size-xl="3">
+            <mat-checkbox [checked]="asignado" formControlName="asignado" color="primary">Asignado</mat-checkbox>
+          </ion-col>
+
+          <ion-col size-xs="6" size-xl="3">
+            <mat-checkbox formControlName="contactado" color="primary">Contactado</mat-checkbox>
+          </ion-col>
+
+          <ion-col size-xs="6" size-xl="3">
+            <mat-checkbox formControlName="presupuestado" color="primary">Presupuestado</mat-checkbox>
+          </ion-col>
+
+          <ion-col size-xs="6" size-xl="3">
+            <mat-checkbox formControlName="tramitado" color="primary">Tramitado</mat-checkbox>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size-xs=12>
+            <mat-form-field appearance="outline" class="centro">
+              <mat-label>Interés</mat-label>
+              <mat-select formControlName="interes" multiple>
+                <mat-select-trigger>
+                  {{newUserForm.value.interes ? ' ('+(newUserForm.value.interes.length)+') Seleccionados' : ''}}
+                </mat-select-trigger>
+                <mat-option (click)="selected()" *ngFor="let interes of intereses" [value]="interes.id">{{interes.tipo}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+          </ion-row>
+
+          <ion-row>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="izquierda">
+              <mat-label>Observaciones</mat-label>
+              <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                formControlName="observaciones"></textarea>
+            </mat-form-field>
+          </ion-col>
+          <ion-col size-xs=12 size-xl="6">
+            <mat-form-field appearance="outline" class="derecha">
+              <mat-label>Agente Digital</mat-label>
+              <input type="text" matInput formControlName="agenteDigital">
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <br>
+            <ion-button color="primary" (click)="createUser()" [disabled]="!newUserForm.valid">CREAR</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <table mat-table [dataSource]="seleccionados">
+          <ng-container matColumnDef="intereses">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> INTERESES SELECCIONADOS </th>
+            <td mat-cell *matCellDef="let element">{{element}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['intereses']" class="header-row"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsData;"></tr>
+        </table>
+      </ion-grid>
+    </form>
+  </ng-container>
+</ion-content>

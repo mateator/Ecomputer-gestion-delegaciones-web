@@ -1,51 +1,156 @@
-ion-content{
-  --background: #60a3bc;
-}
 
-#container{
+ion-header{
+  --ion-background-color: #19375d;
+  --ion-text-color: white;
   text-align: center;
-  overflow: visible;
-  top: 25%;
-  width: 350px;
-  margin: auto;
-  height: 400px;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+
 }
+.container {
+  width: 100%;
+  height: 100%;
 
-#imagen img{
-  height: 150px;
-  border-radius: 33%;
-  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url('../../assets/img/background2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  // max-width: 1920px; al ser background-size cover, por si se necesita limitar el aumento de la img
+  // margin: auto;
 }
-
-#imagen {
-
-  position: absolute;
-  background-color: #60a3bc;
-  width: 50%;
-  padding: 10px;
-  border-radius: 33%;
-  left: 0;
-  right: 0;
-  top: -80px;
-  margin: auto;
-  z-index: 2;
-}
-
-#login{
-  position: relative;
-  height: 200px;
-  padding-top: 110px;
-  width: 70%;
-  margin: auto;
-}
-
-#login ion-row{
-  margin-bottom: 40px;
+#login {
+  opacity: 95%;
+  width: 400px;
+  height: 480px;
   text-align: center;
+  --background: transparent;
+  box-shadow: none;
+  border-radius: 15px;
 }
 
-ion-icon{
-  font-size: 30px;
-  padding-top: 15px;
+#reminder {
+  //display flex si no tuviera los estilos de ion-row ya
+  justify-content: space-between;
+}
+
+#reminder p {
+  color: #454545;
+  font-size: 1.1em;
+}
+
+#grid ion-row:not(:nth-child(3)) {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+#grid, #grid ion-col {
+  padding: 0;
+  color: #aaaaaa;
+}
+
+#grid ion-label {
+  font-size: 14px;
+  --color: #aaaaaa;
+
+}
+
+#grid ion-col:nth-child(odd) {
+  text-align: center;
+  margin: auto;
+
+  ion-icon {
+    font-size: 2em;
+  }
+}
+
+#logo {
+  width: 160px;
+  height: 160px;
+//margin: arriba derecha abajo izq;
+  margin: 2em auto 3em auto;
+  object-fit: cover;
+  object-position:left;
+  border-radius: 10px;
+
+}
+
+#logo::part(image){
+  border-radius: 10px;
+
+}
+
+//h3 adjacente al logo
+#logo + h3 {
+  margin-top: 1.2em;
+}
+
+.title{
+  display: none;
+}
+
+
+
+#submit{
+  //para poder emplear minúsculas dentro del botón
+  text-transform: none;
+
+  width: 100%;
+  height: 55px;
+  margin: 0;
+  --border-radius:0;
+  background-color: #0279c8;
+  --border-color:#0279c8;
+
+
+  .buttonContent {
+    color: white;
+    font-weight: 500;
+  }
+}
+
+.responsiveContainer{
+//padding: arriba derecha abajo izq;
+  padding: 0.5em 1.2em 0 1.2em;
+}
+
+@media (min-width:960px) {
+  .container{
+    align-items: center;
+    #logo{
+      margin-bottom: 0;
+    }
+    #login{
+      --background: white;
+
+      ion-card:last-child{
+        box-shadow: none;
+      }
+      .title{
+        display: block;
+      }
+    }
+    #submit{
+      width: 40%;
+      height: 40px;
+      background-color: white;
+      margin-top: 1.8em;
+      --border-radius: 50px;
+
+      .buttonContent{
+        color: black;
+      font-size: 16px;
+
+      }
+    }
+
+    #submit:hover{
+      background-color: #0279c8;
+      border-radius: 50px;
+      .buttonContent{
+        color: white;
+
+      }
+    }
+  }
 }

@@ -1,0 +1,34 @@
+ion-content{
+  --ion-background-color: #EEEFF0;
+}
+ion-header{
+  text-align: center;
+  --ion-background-color: #19375d;
+  --ion-text-color: white;
+}
+ion-grid{
+  max-width: 55em;
+}
+ion-row:first-child{
+  margin-top:1em;
+  text-align: left;
+}
+mat-checkbox{
+  margin-bottom: 1em;
+}
+.centro, .derecha{
+  width: 100%;
+  margin: auto;
+}
+.izquierda{
+  width: 90%;
+  margin: auto;
+}
+table{
+  margin-top:1em;
+  width:100%;
+}
+th{
+  color: white;
+  background-color: #19375d;
+}
